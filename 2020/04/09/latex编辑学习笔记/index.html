@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.4" color="#222">
+
+
+  <link rel="manifest" href="/images/avatar.jpg">
+
+
+
+
+  <meta name="keywords" content="Markdown,Latex," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习如何插入数学公式的笔记。开始学习前的准备：在主题配置文件中enable mathjax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="latex学习">
+<meta property="og:url" content="http://yoursite.com/child/2020/04/09/latex%E7%BC%96%E8%BE%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Jeremy的博客">
+<meta property="og:description" content="学习如何插入数学公式的笔记。开始学习前的准备：在主题配置文件中enable mathjax">
+<meta property="article:published_time" content="2020-04-09T07:29:40.000Z">
+<meta property="article:modified_time" content="2020-07-11T13:37:21.276Z">
+<meta property="article:author" content="Jeremy">
+<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="Latex">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/child/2020/04/09/latex编辑学习笔记/"/>
+
+
+
+
+
+  <title>latex学习 | Jeremy的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jeremy的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/child/2020/04/09/latex%E7%BC%96%E8%BE%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeremy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeremy的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">latex学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-09T15:29:40+08:00">
+                2020-04-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-07-11T21:37:21+08:00">
+                2020-07-11
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <center>学习如何插入数学公式的笔记。开始学习前的准备：在主题配置文件中enable mathjax</center>
+<a id="more"></a>
+
+<h1 id="一、公式使用参考"><a href="#一、公式使用参考" class="headerlink" title="一、公式使用参考"></a>一、公式使用参考</h1><h2 id="1-如何插入公式"><a href="#1-如何插入公式" class="headerlink" title="1.如何插入公式"></a>1.如何插入公式</h2><p>$LaTeX$地数学公式有两种：行中公式和独立公式。行中公式放在文中与其他文字混编，独立公式单独成行。<br><strong>行中公式：</strong>  </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$数学公式$</span><br></pre></td></tr></table></figure>
+
+<p><strong>独立公式：</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ 数学公式 $$</span><br></pre></td></tr></table></figure>
+
+<p><strong>编号地公式：</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ a := x^2-y^3 \tag&#123;<span class="emphasis">*&#125;\label&#123;*</span>&#125; $$</span><br></pre></td></tr></table></figure>
+
+<p><strong>自动编号后地公式可在全文任意处使用<code>\eqref{eq:公式名}</code>语句引用</strong></p>
+<ul>
+<li>例子：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ J<span class="emphasis">_\alpha(x) = \sum_</span>&#123;m=0&#125;^\infty \frac&#123;(-1)^m&#125;&#123;m! \Gamma (m + \alpha + 1)&#125; &#123;\left(&#123; \frac&#123;x&#125;&#123;2&#125; &#125;\right)&#125;^&#123;2m + \alpha&#125; \text &#123;，行内公式示例&#125; $</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>显示$ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，行内公式示例} $  </p>
+</li>
+<li><p>例子:</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ J<span class="emphasis">_alpha(x) = \sum_</span>&#123;m=0&#125;^\infty \frac&#123;(-1)^m&#125;&#123;m! \Gama&#123;m + \alpha + 1&#125;&#125;$$</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示:<br>$$<br>J_alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma{m + \alpha + 1}}<br>$$</p>
+</li>
+<li><p>例子:  </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ a := x^2-y^3 \tag&#123;<span class="emphasis">*&#125;\label&#123;*</span>&#125; $$</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$引用：a+y^3 \stackrel&#123;\eqref&#123;1&#125;&#125;= x^2$$</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li>显示<br>$$<br>a = x^2-y^3 \tag{*}\label{1}<br>$$</li>
+</ul>
+<p>$$<br>引用:a+y^3 \stackrel{\eqref{1}}= x^2<br>$$</p>
+<h2 id="2-输入上下标"><a href="#2-输入上下标" class="headerlink" title="2.输入上下标"></a>2.输入上下标</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\left(\frac&#123;\alpha^\infty&#125;&#123;\lambda^\infty&#125;\right)$</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\left(\frac{\alpha^\infty}{\lambda^\infty}\right)<br>$$</p>
+<h2 id="3-输入括号和分隔符"><a href="#3-输入括号和分隔符" class="headerlink" title="3.输入括号和分隔符"></a>3.输入括号和分隔符</h2><p>()、[]和|表示本身，使用<code>\{\}</code>表示{}，当要显示大括号或分隔符是，要用<code>\left</code>和<code>\right</code>命令</p>
+<table>
+<thead>
+<tr>
+<th align="center">输入</th>
+<th align="center">显示</th>
+<th align="center">输入</th>
+<th align="center">显示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>\lbrace</code></td>
+<td align="center">{</td>
+<td align="center"><code>\rbrace</code></td>
+<td align="center">}</td>
+</tr>
+</tbody></table>
+<h2 id="4-输入分数"><a href="#4-输入分数" class="headerlink" title="4.输入分数"></a>4.输入分数</h2><p>使用命令<code>\frac{分子}{分母}</code>或<code>分子 \over 分母</code></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$\frac&#123;1&#125;&#123;2&#125;\quad  or  \quad &#123;1\over 2&#125;$//注意：over用法中的大括号&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>$\frac{1}{2}\quad  or  \quad {1\over 2}$</p>
+<h2 id="5-输入开方"><a href="#5-输入开方" class="headerlink" title="5.输入开方"></a>5.输入开方</h2><p><code>\sqrt[根指数、默认为2]{被开方数}</code></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$\sqrt[2]&#123;2&#125;$</span><br></pre></td></tr></table></figure>
+
+<p>显示：$\sqrt[2]{2}$</p>
+<h2 id="6-省略号"><a href="#6-省略号" class="headerlink" title="6.省略号"></a>6.省略号</h2><p>文本底线对齐的省略号<code>\ldots</code>，文本中线对齐的省略号<code>\cdots</code></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">X<span class="emphasis">_1+X_</span>2+\underbrace&#123;\cdots&#125;<span class="emphasis">_&#123;\rm cdots&#125;+X_</span>n</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>X_1+X_2+\underbrace{\cdots}_{ \rm cdots}+X_n<br>$$</p>
+<h2 id="7-矢量"><a href="#7-矢量" class="headerlink" title="7.矢量"></a>7.矢量</h2><p><code>\vec{矢量}c</code></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\vec&#123;a&#125; \cdot \vec&#123;b&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\vec{a} \cdot \vec{b}<br>$$</p>
+<h2 id="8-积分"><a href="#8-积分" class="headerlink" title="8.积分"></a>8.积分</h2><p><code>\int_积分下限^积分上限{被积表达式}</code></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\int_&#123;-\infty&#125;^&#123;+\infty&#125;&#123;xdx&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\int_{-\infty}^{+\infty}{xdx}<br>$$</p>
+<h2 id="9-极限"><a href="#9-极限" class="headerlink" title="9.极限"></a>9.极限</h2><p><code>\lim_{变量\to表达式}表达式</code>其中<code>\to</code>可以改为任意符号</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\lim_&#123;n\to +\infty&#125;\frac&#123;1&#125;&#123;n&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\lim_{n\to +\infty}\frac{1}{n}<br>$$</p>
+<h2 id="10-累加"><a href="#10-累加" class="headerlink" title="10.累加"></a>10.累加</h2><p><code>\sum_{下标}^{上标}{累加表达式}</code></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\sum_&#123;x=0&#125;^&#123;x=n&#125;&#123;x^2&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\sum_{x=0}^{n}{x^2}<br>$$</p>
+<h2 id="11-常用希腊字母"><a href="#11-常用希腊字母" class="headerlink" title="11.常用希腊字母"></a>11.常用希腊字母</h2><table>
+<thead>
+<tr>
+<th align="center">输入</th>
+<th align="center">显示</th>
+<th align="center">输入</th>
+<th align="center">显示</th>
+<th>输入</th>
+<th align="center">显示</th>
+<th align="center">输入</th>
+<th align="center">显示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>\alpha</code></td>
+<td align="center">$\alpha$</td>
+<td align="center"><code>A</code></td>
+<td align="center">$A$</td>
+<td><code>\beta</code></td>
+<td align="center">$\beta$</td>
+<td align="center"><code>B</code></td>
+<td align="center">$B$</td>
+</tr>
+<tr>
+<td align="center"><code>\lambda</code></td>
+<td align="center">$\lambda$</td>
+<td align="center"><code>\lambda</code></td>
+<td align="center">$\Lambda$</td>
+<td><code>\pi</code></td>
+<td align="center">$\pi$</td>
+<td align="center"><code>\Pi</code></td>
+<td align="center">$\Pi$</td>
+</tr>
+</tbody></table>
+<p>部分字母有变量专用形式，以<code>\var-</code>开头</p>
+<table>
+<thead>
+<tr>
+<th align="center">小写形式</th>
+<th align="center">大写形式</th>
+<th align="center">标量形式</th>
+<th align="center">显示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>\phi</code></td>
+<td align="center"><code>\Phi</code></td>
+<td align="center"><code>\varphi</code></td>
+<td align="center">$\phi\mid\Phi\mid\varphi$</td>
+</tr>
+</tbody></table>
+<p align = 'right'>    to be continued</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+          
+            <a href="/tags/Latex/" rel="tag"># Latex</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/07/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" rel="next" title="Java学习">
+                <i class="fa fa-chevron-left"></i> Java学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/19/JavaGUI/" rel="prev" title="JavaGUI">
+                JavaGUI <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Jeremy" />
+            
+              <p class="site-author-name" itemprop="name">Jeremy</p>
+              <p class="site-description motion-element" itemprop="description">DO NOT SAY = DO AND KEEP</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:865735712@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、公式使用参考"><span class="nav-number">1.</span> <span class="nav-text">一、公式使用参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-如何插入公式"><span class="nav-number">1.1.</span> <span class="nav-text">1.如何插入公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-输入上下标"><span class="nav-number">1.2.</span> <span class="nav-text">2.输入上下标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-输入括号和分隔符"><span class="nav-number">1.3.</span> <span class="nav-text">3.输入括号和分隔符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-输入分数"><span class="nav-number">1.4.</span> <span class="nav-text">4.输入分数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-输入开方"><span class="nav-number">1.5.</span> <span class="nav-text">5.输入开方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-省略号"><span class="nav-number">1.6.</span> <span class="nav-text">6.省略号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-矢量"><span class="nav-number">1.7.</span> <span class="nav-text">7.矢量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-积分"><span class="nav-number">1.8.</span> <span class="nav-text">8.积分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-极限"><span class="nav-number">1.9.</span> <span class="nav-text">9.极限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-累加"><span class="nav-number">1.10.</span> <span class="nav-text">10.累加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-常用希腊字母"><span class="nav-number">1.11.</span> <span class="nav-text">11.常用希腊字母</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeremy</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
