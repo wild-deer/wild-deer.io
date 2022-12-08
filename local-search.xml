@@ -25,27 +25,6 @@
   
   
   <entry>
-    <title>UE添加LOD</title>
-    <link href="/2022/09/19/UE%E6%B7%BB%E5%8A%A0LOD/"/>
-    <url>/2022/09/19/UE%E6%B7%BB%E5%8A%A0LOD/</url>
-    
-    <content type="html"><![CDATA[<center>UE使用LOD</center><!--- more --->]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>UE5</tag>
-      
-      <tag>LOD</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>UE材质参数</title>
     <link href="/2022/09/19/UE%E8%93%9D%E5%9B%BE%E6%8E%A7%E5%88%B6%E6%9D%90%E8%B4%A8/"/>
     <url>/2022/09/19/UE%E8%93%9D%E5%9B%BE%E6%8E%A7%E5%88%B6%E6%9D%90%E8%B4%A8/</url>
@@ -86,25 +65,6 @@
   
   
   <entry>
-    <title></title>
-    <link href="/2022/09/02/docker/"/>
-    <url>/2022/09/02/docker/</url>
-    
-    <content type="html"><![CDATA[<center>docker配置</center><!--- more ---><h2 id="完整流程"><a href="#完整流程" class="headerlink" title="完整流程"></a>完整流程</h2><h3 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h3><p><a href="https://cloud.tencent.com/developer/article/1167995#:~:text=%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8Docker%201%20%E4%BB%8B%E7%BB%8D%202%20%E5%87%86%E5%A4%87%203%20%E7%AC%AC1%E6%AD%A5%20-,7%20%E7%AC%AC5%E6%AD%A5%20-%20%E8%BF%90%E8%A1%8CDocker%E5%AE%B9%E5%99%A8.%E6%88%91%E4%BB%AC%E5%AE%89%E8%A3%85Node....%208%20%E7%AC%AC6%E6%AD%A5%20-%20%E7%AE%A1%E7%90%86Docker%E5%AE%B9%E5%99%A8.">安装教程连接</a></p><h3 id="docker拉取python镜像"><a href="#docker拉取python镜像" class="headerlink" title="docker拉取python镜像"></a>docker拉取python镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">~$ docker pull python:3.9.13-slim-buster<br></code></pre></td></tr></table></figure><h3 id="docker生成并运行容器"><a href="#docker生成并运行容器" class="headerlink" title="docker生成并运行容器"></a>docker生成并运行容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">~$ sudo docker run --<span class="hljs-built_in">rm</span> -it --device /dev/ttyS1:/dev/ttyS0 python:3.9.13-slim-buster /bin/sh<br><span class="hljs-comment">#</span><br><span class="hljs-comment">#cd root</span><br><span class="hljs-comment">#mkdir pythonProject</span><br><span class="hljs-comment">#cd pythonProject</span><br></code></pre></td></tr></table></figure><p>其中ttyS1为虚拟机中的串口，ttyS0为docker中映射的串口，执行上面的第一条命令之后，容器中才会出现ttyS0串口。进入docker容器命令行之后创建存放项目的文件夹pythonProject</p><h3 id="将主机中文件复制到docker中指定目录"><a href="#将主机中文件复制到docker中指定目录" class="headerlink" title="将主机中文件复制到docker中指定目录"></a>将主机中文件复制到docker中指定目录</h3><p>再打开一个终端，在终端中执行下面命令，将写好的pymodbus.py文件复制到docker容器中</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">~$ sudo docker <span class="hljs-built_in">cp</span> /home/jeremy/Desktop/pymodbus.py sharp_faraday:/root/pythonProject<br></code></pre></td></tr></table></figure><p>回到docker命令终端，运行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#pip install serial -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="hljs-comment">#pip install modbus_tk -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="hljs-comment">#python3 pymodbus.py</span><br></code></pre></td></tr></table></figure><h2 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h2><h3 id="docker镜像迁移"><a href="#docker镜像迁移" class="headerlink" title="docker镜像迁移"></a>docker镜像迁移</h3><ul><li>从目标机器导出镜像到指定目录</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sysadm@SCT230A:~$ docker save 2f31a3feab4e &gt; /home/sysadm/test/docker/img.tar<br></code></pre></td></tr></table></figure><ul><li>在windows上重新加载镜像</li></ul><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">ps</span> D:\&gt; docker load &lt; D:\img.tar<br></code></pre></td></tr></table></figure><ul><li>重命名镜像，给id为<code>2f31a3feab4e</code>的镜像重命名为1base_img:1.0</li></ul><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">ps</span> D:\&gt; docker tag <span class="hljs-number">2</span>f31a3feab4e base_img:<span class="hljs-number">1.0</span><br></code></pre></td></tr></table></figure><h3 id="docker使用"><a href="#docker使用" class="headerlink" title="docker使用"></a>docker使用</h3><ul><li>生成容器并启动</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">~$ docker run -it nginx:latest /bin/bash<br></code></pre></td></tr></table></figure><p><a href="https://cloud.tencent.com/developer/article/1633272">生成容器</a></p>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>docker</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>在虚拟机中使用串口</title>
     <link href="/2022/09/01/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%B2%E5%8F%A3%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <url>/2022/09/01/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%B2%E5%8F%A3%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
@@ -118,33 +78,6 @@
       <tag>串口</tag>
       
       <tag>虚拟机</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>CesiumLab切片测试</title>
-    <link href="/2022/08/24/CesiumLab%E5%88%87%E7%89%87%E6%B5%8B%E8%AF%95/"/>
-    <url>/2022/08/24/CesiumLab%E5%88%87%E7%89%87%E6%B5%8B%E8%AF%95/</url>
-    
-    <content type="html"><![CDATA[<center>经纬度表</center><!--- more ---><h3 id="1-测试准备"><a href="#1-测试准备" class="headerlink" title="1.测试准备"></a>1.测试准备</h3><p>准备四个FBX文件</p><p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1image-20220824120001297.png" alt="image-20220824120001297"></p><p>在cesiumlab通用模型切片中，改变八叉树处理器的设置，观察模型的变化</p><p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1image-20220824120254560.png" alt="image-20220824120254560"></p><h3 id="2-cesiumlab模型切片"><a href="#2-cesiumlab模型切片" class="headerlink" title="2.cesiumlab模型切片"></a>2.cesiumlab模型切片</h3><ul><li>设置1</li></ul><p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1image-20220824122725587.png" alt="image-20220824122725587"></p><table><thead><tr><th>名称</th><th>编号</th></tr></thead><tbody><tr><td>台账.FBX</td><td>1</td></tr><tr><td>35kv.FBX</td><td></td></tr><tr><td>非台账.FBX</td><td></td></tr><tr><td>附属小品.FBX</td><td></td></tr><tr><td>建筑地面.FBX</td><td></td></tr></tbody></table>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>CesiumLab</tag>
-      
-      <tag>UE5</tag>
-      
-      <tag>Cesium</tag>
-      
-      <tag>FBX</tag>
-      
-      <tag>切片</tag>
       
     </tags>
     
@@ -255,9 +188,9 @@
     
     <tags>
       
-      <tag>UE5</tag>
-      
       <tag>旋转</tag>
+      
+      <tag>UE5</tag>
       
       <tag>pawn</tag>
       
@@ -280,9 +213,9 @@
     
     <tags>
       
-      <tag>UE5</tag>
-      
       <tag>旋转</tag>
+      
+      <tag>UE5</tag>
       
       <tag>pawn</tag>
       
@@ -455,9 +388,9 @@
     
     <tags>
       
-      <tag>UE5</tag>
-      
       <tag>Mysql</tag>
+      
+      <tag>UE5</tag>
       
       <tag>2022实习</tag>
       
@@ -877,9 +810,9 @@
     
     <tags>
       
-      <tag>UE5</tag>
-      
       <tag>Mysql</tag>
+      
+      <tag>UE5</tag>
       
       <tag>2022实习</tag>
       
@@ -1028,7 +961,7 @@
     <link href="/2021/12/27/erro/"/>
     <url>/2021/12/27/erro/</url>
     
-    <content type="html"><![CDATA[<center>博客报错`Please make sure you have the correct access rights`</center><span id="more"></span><h3 id="太久没使用自建博客，当执行-deploy-命令时报错"><a href="#太久没使用自建博客，当执行-deploy-命令时报错" class="headerlink" title="太久没使用自建博客，当执行  deploy 命令时报错"></a>太久没使用自建博客，当执行  deploy 命令时报错</h3><p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/move/20211227230750.png" alt="image-20211227230750912"></p><p>解决方法：</p><p>重置 ssh</p><ol><li>重置用户名和邮箱 git config –global <a href="http://user.name/">user.name</a> “yourname” git config –global user.email“<a href="mailto:&#x79;&#111;&#117;&#114;&#x40;&#101;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;">&#x79;&#111;&#117;&#114;&#x40;&#101;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;</a>“ 注：yourname是你要设置的名字，your@email是你要设置的邮箱。</li></ol><p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/move/20211227231758.png" alt="image-20211227231758794"></p><ol start="2"><li><p>删除.ssh文件夹下的known_hosts </p></li><li><p>git输入命令 $ ssh-keygen -t rsa -C <a href="https://blog.csdn.net/mailto:%22your@email.com">“your@email.com</a>“（请填你设置的邮箱地址） 一路yes和回车 然后系统会自动在.ssh文件夹下生成两个文件，id_rsa和id_rsa.pub，用记事本打开id_rsa.pub 将全部的内容复制 </p></li><li><p>打开<a href="https://github.com/%EF%BC%8C%E7%99%BB%E9%99%86%E4%BD%A0%E7%9A%84%E8%B4%A6%E6%88%B7%EF%BC%8C%E8%BF%9B%E5%85%A5%E8%AE%BE%E7%BD%AE">https://github.com/，登陆你的账户，进入设置</a> 进入ssh设置 在key中将刚刚复制的粘贴进去 点击add ssh key，</p></li></ol><p><strong><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/move/20211227231144.png" alt="image-20211227231144455"></strong></p><p> ok！</p><ol start="5"><li>在git中输入命令： ssh -T <a href="https://blog.csdn.net/mailto:git@github.com">git@github.com</a> 然后。。</li></ol><p> 输入命令：yes 回车</p><hr><ol start="6"><li><p>完成上面步骤还需要将网站设置为https</p><p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/move/20211231015853.png" alt="image-20211231015853253"></p></li></ol><p>最后可以用https的访问方式访问</p><p><a href="https://cloud.tencent.com/developer/article/1572090">参考链接1</a><br><a href="https://blog.csdn.net/qq_43705131/article/details/107965888">参考链接2</a><br><a href="https://blog.csdn.net/qq_43705131/article/details/107965888">参考链接3</a></p>]]></content>
+    <content type="html"><![CDATA[<center>博客报错`Please make sure you have the correct access rights`</center><span id="more"></span><h3 id="太久没使用自建博客，当执行-deploy-命令时报错"><a href="#太久没使用自建博客，当执行-deploy-命令时报错" class="headerlink" title="太久没使用自建博客，当执行  deploy 命令时报错"></a>太久没使用自建博客，当执行  deploy 命令时报错</h3><p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/move/20211227230750.png" alt="image-20211227230750912"></p><p>解决方法：</p><p>重置 ssh</p><ol><li>重置用户名和邮箱 git config –global <a href="http://user.name/">user.name</a> “yourname” git config –global user.email“<a href="mailto:&#x79;&#111;&#117;&#x72;&#x40;&#x65;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#111;&#109;">&#x79;&#111;&#117;&#x72;&#x40;&#x65;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#111;&#109;</a>“ 注：yourname是你要设置的名字，your@email是你要设置的邮箱。</li></ol><p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/move/20211227231758.png" alt="image-20211227231758794"></p><ol start="2"><li><p>删除.ssh文件夹下的known_hosts </p></li><li><p>git输入命令 $ ssh-keygen -t rsa -C <a href="https://blog.csdn.net/mailto:%22your@email.com">“your@email.com</a>“（请填你设置的邮箱地址） 一路yes和回车 然后系统会自动在.ssh文件夹下生成两个文件，id_rsa和id_rsa.pub，用记事本打开id_rsa.pub 将全部的内容复制 </p></li><li><p>打开<a href="https://github.com/%EF%BC%8C%E7%99%BB%E9%99%86%E4%BD%A0%E7%9A%84%E8%B4%A6%E6%88%B7%EF%BC%8C%E8%BF%9B%E5%85%A5%E8%AE%BE%E7%BD%AE">https://github.com/，登陆你的账户，进入设置</a> 进入ssh设置 在key中将刚刚复制的粘贴进去 点击add ssh key，</p></li></ol><p><strong><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/move/20211227231144.png" alt="image-20211227231144455"></strong></p><p> ok！</p><ol start="5"><li>在git中输入命令： ssh -T <a href="https://blog.csdn.net/mailto:git@github.com">git@github.com</a> 然后。。</li></ol><p> 输入命令：yes 回车</p><hr><ol start="6"><li><p>完成上面步骤还需要将网站设置为https</p><p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/move/20211231015853.png" alt="image-20211231015853253"></p></li></ol><p>最后可以用https的访问方式访问</p><p><a href="https://cloud.tencent.com/developer/article/1572090">参考链接1</a><br><a href="https://blog.csdn.net/qq_43705131/article/details/107965888">参考链接2</a><br><a href="https://blog.csdn.net/qq_43705131/article/details/107965888">参考链接3</a></p>]]></content>
     
     
     
