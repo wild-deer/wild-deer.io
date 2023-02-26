@@ -1,0 +1,1080 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jeremy">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Procedurally Spawning Foliage中文翻译，原文参考https:&#x2F;&#x2F;cesium.com&#x2F;learn&#x2F;unreal&#x2F;unreal-procedural-foliage&#x2F;?utm_source&#x3D;pocket_saves#prerequisites">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cesium程序化生成植被">
+<meta property="og:url" content="http://yoursite.com/child/2023/02/15/%E5%9C%A8cesium%E4%B8%8A%E7%A8%8B%E5%BA%8F%E5%8C%96%E7%94%9F%E6%88%90%E6%A4%8D%E8%A2%AB/index.html">
+<meta property="og:site_name" content="Jeremy的博客">
+<meta property="og:description" content="Procedurally Spawning Foliage中文翻译，原文参考https:&#x2F;&#x2F;cesium.com&#x2F;learn&#x2F;unreal&#x2F;unreal-procedural-foliage&#x2F;?utm_source&#x3D;pocket_saves#prerequisites">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230215143209144.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230215143237346.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230215152325967.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230215152613846.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216115254791.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216115633735.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216135818470.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216135929936.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216140332898.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216140535714.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216141110698.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216141216586.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216141742149.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216142453308.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216142512512.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216142722387.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216144448446.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216144919958.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216145102832.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216151908433.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216151936025.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216152030011.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216152755952.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216153219463.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216153427378.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216153639219.png">
+<meta property="og:image" content="c:/Users/sxtc/AppData/Roaming/Typora/typora-user-images/image-20230216153820029.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216154737884.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216155649914.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216155910599.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216160058923.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216160611248.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216161542328.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216162218725.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216162455135.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216162846126.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216162935701.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163128107.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163226388.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163237974.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163536666.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163812284.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163849495.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163859484.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216164616074.png">
+<meta property="og:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216165809939.png">
+<meta property="article:published_time" content="2023-02-15T06:17:18.000Z">
+<meta property="article:modified_time" content="2023-02-16T09:03:15.618Z">
+<meta property="article:author" content="Jeremy">
+<meta property="article:tag" content="UE5">
+<meta property="article:tag" content="cesium">
+<meta property="article:tag" content="Procedurally">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230215143209144.png">
+  
+  
+  
+  <title>cesium程序化生成植被 - Jeremy的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"epV3UPDGAd94dG2l47ji5n5F-gzGzoHsz","app_key":"NULUxa6ORczT0e353jhMAKLS","server_url":"https://epv3updg.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Jeremy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/202206091405620.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="cesium程序化生成植被"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-15 14:17" pubdate>
+          2023年2月15日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          33k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          183 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">cesium程序化生成植被</h1>
+            
+            <div class="markdown-body">
+              
+              <p>Procedurally Spawning Foliage中文翻译，原文参考<code>https://cesium.com/learn/unreal/unreal-procedural-foliage/?utm_source=pocket_saves#prerequisites</code></p>
+<span id="more"></span>
+
+<p>目录</p>
+<p>[TOC]</p>
+<p>在下面的教程中，您将学习如何使用Niagara粒子系统和自定义C++代码来分析cesium世界地形并按程序生成植物。</p>
+<p>对于首次使用虚幻引擎或<code>cesium for unreal</code>的用户来说，本教程可能很复杂。如果你是新手，请查看虚<a target="_blank" rel="noopener" href="https://cesium.com/learn/unreal/unreal-quickstart/">幻cesium速入门</a>，了解虚幻cesium的基础。</p>
+<p>想了解更多关于树叶的信息，或者只是想用手放置它？访问<a target="_blank" rel="noopener" href="https://cesium.com/learn/unreal/unreal-foliage/">在cesium瓦片上放置植物</a>。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230215143209144.png" srcset="/img/loading.gif" lazyload alt="image-20230215143209144"></p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230215143237346.png" srcset="/img/loading.gif" lazyload alt="image-20230215143237346"></p>
+<p><em>缩写：</em></p>
+<ul>
+<li><em>RT &#x3D; 渲染目标</em></li>
+<li><em>HISM&#x3D;分层实例化静态网格</em></li>
+<li><em>RTDI &#x3D; 呈现目标数据接口</em></li>
+</ul>
+<p>我们将创建的系统使用 3 个组件：</p>
+<ul>
+<li><strong>cesium world terrain -</strong> 正交场景捕获组件将放置在玩家摄像机上方。正交宽度定义将在其中生成植物实例的网格。</li>
+<li><strong>粒子网格模拟（利用 simulation stages）</strong> - 捕获图像中的每个像素将在此处进行处理，然后输出到分类RT上。</li>
+<li><strong>植物捕获Actor</strong> - 提取渲染目标的像素并将它们重新投影回世界位置。场景深度 RT 用于定义每个植物实例的高程，场景法线 RT 定义植物实例的旋转方式。</li>
+</ul>
+<h2 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h2><ul>
+<li>虚幻引擎4.26或更高版本的安装</li>
+<li>Visual Studio 2019（安装了“桌面开发C++”工作负载）或虚幻引擎的Rider</li>
+<li>了解C++开发基础知识</li>
+<li>使用cesium for unreal件搭建的项目</li>
+<li><a target="_blank" rel="noopener" href="https://cesium.com/learn/unreal/unreal-quickstart/#step-5-connect-to-cesium-ion">连接到cesium</a>以添加地形图块集</li>
+</ul>
+<h2 id="Step-1-C-：创建Actor"><a href="#Step-1-C-：创建Actor" class="headerlink" title="Step 1: C++：创建Actor"></a>Step 1: C++：创建Actor</h2><p>在<strong>虚幻编辑器</strong>中，打开<strong>文件</strong>上下文菜单。单击“<strong>新建C++类</strong>”，然后选择<strong>“执行组件</strong>”。在本教程中，我们将它命名为“FoliageCaptureActor”。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230215152325967.png" srcset="/img/loading.gif" lazyload alt="image-20230215152325967"></p>
+<p>我们还将创建一个HISM组件，该组件继承了**分层实例化静态网格体组件(Hierarchical Instanced Static Mesh)**。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230215152613846.png" srcset="/img/loading.gif" lazyload alt="image-20230215152613846"></p>
+<p>使用您选择的 IDE 打开项目解决方案。</p>
+<h2 id="Build-cs"><a href="#Build-cs" class="headerlink" title="Build.cs"></a><code>Build.cs</code></h2><p>将以下模块添加到项目文件中：<code>PublicDependencyModuleNames</code> <code>build.cs</code></p>
+<ul>
+<li><code>RenderCore</code></li>
+<li><code>RHI</code></li>
+<li><code>CesiumRuntime</code></li>
+<li><code>Foliage</code></li>
+</ul>
+<p>HTTP 模块作为依赖项添加，因此项目能够针对交付版本进行编译。</p>
+<p>C++标准版本还需要设置<code>CppStandard = CppStandardVersion.Cpp17;</code></p>
+<p>然后，该文件应如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">using</span> UnrealBuildTool;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">aiden_geo_tutorial</span> : ModuleRules<br>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">aiden_geo_tutorial</span><span class="hljs-params">(ReadOnlyTargetRules Target)</span> : base(Target)</span><br><span class="hljs-function">  &#123;</span><br>     PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;<br> <br>     PublicDependencyModuleNames.<span class="hljs-built_in">AddRange</span>(<span class="hljs-keyword">new</span> string[] &#123; <span class="hljs-string">&quot;Core&quot;</span>, <span class="hljs-string">&quot;CoreUObject&quot;</span>, <span class="hljs-string">&quot;Engine&quot;</span>, <span class="hljs-string">&quot;InputCore&quot;</span>, <span class="hljs-string">&quot;Foliage&quot;</span>, <span class="hljs-string">&quot;CesiumRuntime&quot;</span>, <span class="hljs-string">&quot;RHI&quot;</span>, <span class="hljs-string">&quot;RenderCore&quot;</span>, <span class="hljs-string">&quot;HTTP&quot;</span> &#125;);<br><br>     PrivateDependencyModuleNames.<span class="hljs-built_in">AddRange</span>(<span class="hljs-keyword">new</span> string[] &#123;  &#125;);<br><br>     CppStandard = CppStandardVersion.Cpp17;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="FoliageCaptureActor-h"><a href="#FoliageCaptureActor-h" class="headerlink" title="FoliageCaptureActor.h"></a><code>FoliageCaptureActor.h</code></h2><p>**1.**将包含设置为在头文件中包含以下内容，因为我们将在整个项目中使用其中定义的类。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;CoreMinimal.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;GameFramework/Actor.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Engine/TextureRenderTarget2D.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;FoliageType_InstancedStaticMesh.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;CesiumGeoreference.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;FoliageHISM.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;FoliageCaptureActor.generated.h&quot;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>**2.**随后，定义以下结构和委托。<br>如代码注释中所述，这些数据结构是定义应如何为每个分类生成植被的系统的核心。由于这个项目使用了异步任务，委托将非常有用，特别是当我们想在另一个线程上完成任务后执行函数时。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* @brief Used to store the reprojected points gathered from the RT.</span><br><span class="hljs-comment">*/</span><br><span class="hljs-built_in">USTRUCT</span>(BlueprintType)<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">FFoliageTransforms</span><br>&#123;<br>  <span class="hljs-built_in">GENERATED_BODY</span>()<br>  TMap&lt;UFoliageHISM*, TArray&lt;FTransform&gt;&gt; HISMTransformMap;<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* @brief Array of foliage type transforms gathered from the RT extraction task.</span><br><span class="hljs-comment">*/</span><br><span class="hljs-built_in">USTRUCT</span>()<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">FFoliageTransformsTypeMap</span><br>&#123;<br>  <span class="hljs-built_in">GENERATED_BODY</span>()<br>  TArray&lt;FFoliageTransforms&gt; FoliageTypes;<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* @brief Foliage geometry container</span><br><span class="hljs-comment">*/</span><br><span class="hljs-built_in">USTRUCT</span>(BlueprintType)<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">FFoliageGeometryType</span><br>&#123;<br>  <span class="hljs-built_in">GENERATED_BODY</span>()<br> <br>  <span class="hljs-comment">/* Placement */</span><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Placement&quot;</span>)<br>  <span class="hljs-type">float</span> Density = <span class="hljs-number">0.5f</span>;<br> <br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Placement&quot;</span>)<br>  <span class="hljs-type">bool</span> bRandomYaw = <span class="hljs-literal">false</span>;<br> <br>  <span class="hljs-built_in">UPROPERTY</span>(EditAnywhere, Category = <span class="hljs-string">&quot;Placement&quot;</span>)<br>  FFloatInterval ZOffset = <span class="hljs-built_in">FFloatInterval</span>(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>);<br> <br>  <span class="hljs-built_in">UPROPERTY</span>(EditAnywhere, Category = <span class="hljs-string">&quot;Placement&quot;</span>)<br>  FFloatInterval Scale = <span class="hljs-built_in">FFloatInterval</span>(<span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>);<br><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Placement&quot;</span>)<br>  <span class="hljs-type">bool</span> bAlignToNormal = <span class="hljs-literal">false</span>;<br> <br>  <span class="hljs-comment">/* Mesh Settings */</span><br><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Mesh&quot;</span>)<br>  UStaticMesh* Mesh;<br> <br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Mesh&quot;</span>)<br>  <span class="hljs-type">bool</span> bCollidesWithWorld = <span class="hljs-literal">true</span>;<br><br>  <span class="hljs-built_in">UPROPERTY</span>(EditAnywhere, Category = <span class="hljs-string">&quot;Placement&quot;</span>)<br>  FFloatInterval CullingDistances = <span class="hljs-built_in">FFloatInterval</span>(<span class="hljs-number">4096</span>, <span class="hljs-number">32768</span>);<br><br>  <span class="hljs-comment">/* Expensive */</span><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Mesh&quot;</span>)<br>  <span class="hljs-type">bool</span> bAffectsDistanceFieldLighting = <span class="hljs-literal">false</span>;<br><br>  <span class="hljs-function"><span class="hljs-keyword">friend</span> uint32 <span class="hljs-title">GetTypeHash</span><span class="hljs-params">(<span class="hljs-type">const</span> FFoliageGeometryType&amp; A)</span></span><br><span class="hljs-function">  </span>&#123;<br>     <span class="hljs-keyword">return</span> <span class="hljs-built_in">GetTypeHash</span>(A.Density) + <span class="hljs-built_in">GetTypeHash</span>(A.bRandomYaw) + <span class="hljs-built_in">GetTypeHash</span>(A.ZOffset) + <span class="hljs-built_in">GetTypeHash</span>(A.Scale) +<br>        <span class="hljs-built_in">GetTypeHash</span>(A.Mesh) + <span class="hljs-built_in">GetTypeHash</span>(A.bCollidesWithWorld) +<br>        <span class="hljs-built_in">GetTypeHash</span>(A.bAffectsDistanceFieldLighting);<br>  &#125;<br><br>  <span class="hljs-keyword">friend</span> <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>==(<span class="hljs-type">const</span> FFoliageGeometryType&amp; A, <span class="hljs-type">const</span> FFoliageGeometryType&amp; B)<br>  &#123;<br>     <span class="hljs-keyword">return</span> A.Density == B.Density &amp;&amp; A.Mesh == B.Mesh &amp;&amp; A.bCollidesWithWorld == B.bCollidesWithWorld &amp;&amp; A.<br>        bAffectsDistanceFieldLighting == B.bAffectsDistanceFieldLighting<br>        &amp;&amp; A.Scale.Max == B.Scale.Max &amp;&amp; A.Scale.Min == B.Scale.Min &amp;&amp; A.bRandomYaw == B.bRandomYaw &amp;&amp;<br>           A.ZOffset.Min == B.ZOffset.Min &amp;&amp; A.ZOffset.Max == B.ZOffset.Max;<br> <br>  &#125;<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* @brief Container for a foliage type</span><br><span class="hljs-comment">*/</span><br><span class="hljs-built_in">USTRUCT</span>(BlueprintType)<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">FFoliageClassificationType</span><br>&#123;<br>  <span class="hljs-built_in">GENERATED_BODY</span>()<br><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere)<br>  FString Type;<br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere)<br>  FLinearColor ColourClassification;<br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere)<br>  TArray&lt;FFoliageGeometryType&gt; FoliageTypes;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief If enabled, a line trace will be casted downwards from each point to determine surface normals.</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere)<br>  <span class="hljs-type">bool</span> bAlignToSurfaceWithRaycast = <span class="hljs-literal">false</span>;<br><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere)<br>  int32 PooledHISMsToCreatePerFoliageType = <span class="hljs-number">4</span>;<br>&#125;;<br><br><span class="hljs-comment">// Called after points have been gathered and reprojected from the classification RT.</span><br><span class="hljs-built_in">DECLARE_DELEGATE_OneParam</span>(FOnFoliageTransformsGenerated, FFoliageTransformsTypeMap);<br><br><span class="hljs-comment">// This is called after pixels have been extracted from input RTs</span><br><span class="hljs-built_in">DECLARE_DELEGATE_OneParam</span>(FOnRenderTargetRead, <span class="hljs-type">bool</span>);<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>3</strong>在类中，声明代码片段中包含的以下方法和变量：<code>AFoliageCaptureActor</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">public</span>:<br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Foliage Spawner&quot;</span>)<br>  TArray&lt;FFoliageClassificationType&gt; FoliageTypes;<br><br>  <span class="hljs-built_in">UPROPERTY</span>()<br>  ACesiumGeoreference* Georeference;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Elevation (in meters) of the scene capture component that&#x27;s placed above the player.</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Foliage Spawner&quot;</span>)<br>  <span class="hljs-type">float</span> CaptureElevation = <span class="hljs-number">1024.f</span>;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Orthographic width of our scene capture components</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Foliage Spawner&quot;</span>)<br>  <span class="hljs-type">float</span> CaptureWidth = <span class="hljs-number">131072.f</span>;<br><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Foliage Spawner&quot;</span>)<br>  int32 UpdateFoliageAfterNumFrames = <span class="hljs-number">2</span>;<br><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Foliage Spawner&quot;</span>)<br>  int32 MaxComponentsToUpdatePerFrame = <span class="hljs-number">1</span>;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Coverage grid.</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Foliage Spawner&quot;</span>)<br>  FIntVector GridSize = <span class="hljs-built_in">FIntVector</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief Average geographic width in degrees.</span><br><span class="hljs-comment">  */</span><br>  <span class="hljs-type">double</span> CaptureWidthInDegrees = <span class="hljs-number">0.01</span>;<br><br><span class="hljs-keyword">public</span>:<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Build foliage transforms according to classification types.</span><br><span class="hljs-comment">   * @param FoliageDistributionMap Render Target containing classifications.</span><br><span class="hljs-comment">   * @param NormalAndDepthMap Render Target with normals in the RGB channel and *normalized* depth in Alpha.</span><br><span class="hljs-comment">   * @param RTWorldBounds UE world extents of the render targets.</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-built_in">UFUNCTION</span>(BlueprintCallable, Category = <span class="hljs-string">&quot;Foliage Spawner&quot;</span>)<br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">BuildFoliageTransforms</span><span class="hljs-params">(UTextureRenderTarget2D* FoliageDistributionMap,</span></span><br><span class="hljs-params"><span class="hljs-function">                              UTextureRenderTarget2D* NormalAndDepthMap, FBox RTWorldBounds)</span></span>;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Create required HISM components, removing if outdated</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ResetAndCreateHISMComponents</span><span class="hljs-params">()</span></span>;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Implementable BP event, called when the player moves outside of the capture boundaries.</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-built_in">UFUNCTION</span>(BlueprintCallable, BlueprintNativeEvent, Category = <span class="hljs-string">&quot;Foliage Spawner&quot;</span>)<br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">OnUpdate</span><span class="hljs-params">(<span class="hljs-type">const</span> FVector&amp; NewLocation)</span></span>;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Is the foliage currently building?</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-built_in">UFUNCTION</span>(BlueprintCallable, BlueprintPure, Category = <span class="hljs-string">&quot;Foliage Spawner&quot;</span>)<br>  <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">IsBuilding</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p><code>FoliageTypes</code> 是一个数组，包含我们要生成的几何图形的分类颜色和集合。</p>
+<p><code>UpdateFoliageAfterNumFrames</code> 确定在场景中添加或删除植物的频率。</p>
+<p><code>MaxComponentsToUpdatePerFrame</code> 确定每帧应更新的组件数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">protected</span>:<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief Attempt to correct normals and elevation by raycasting</span><br><span class="hljs-comment">  */</span><br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">CorrectFoliageTransform</span><span class="hljs-params">(<span class="hljs-type">const</span> FVector&amp; InEngineCoordinates, <span class="hljs-type">const</span> FMatrix&amp; InEastNorthUp,</span></span><br><span class="hljs-params"><span class="hljs-function">                              FVector&amp; OutCorrectedPosition, FVector&amp; OutSurfaceNormals, <span class="hljs-type">bool</span>&amp; bSuccess)</span> <span class="hljs-type">const</span></span>;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief For each static mesh, we also want to have multiple HISM components to reduce</span><br><span class="hljs-comment">   * hitches when updating instances.</span><br><span class="hljs-comment">   */</span><br>  TMap&lt;FFoliageGeometryType, TArray&lt;UFoliageHISM*&gt;&gt; HISMFoliageMap;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief The scene depth value is multiplied by a small value so it remains within the range of 0.0 to 1.0.</span><br><span class="hljs-comment">   * In this function it is projected back to its (approximated) original value and then inverted.</span><br><span class="hljs-comment">   * @param Value Depth value</span><br><span class="hljs-comment">   * @return Height in meters.</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">GetHeightFromDepth</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; Value)</span> <span class="hljs-type">const</span></span>;<br><br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Converts pixel coordinates back to geographic coordinates.</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-function">glm::dvec3 <span class="hljs-title">PixelToGeographicLocation</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; X, <span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; Y, <span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; Altitude,</span></span><br><span class="hljs-params"><span class="hljs-function">                                       UTextureRenderTarget2D* RT, <span class="hljs-type">const</span> glm::dvec4&amp; GeographicExtents)</span> <span class="hljs-type">const</span></span>;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Converts geographic coordinates to pixel coordinates.</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-function">FIntPoint <span class="hljs-title">GeographicToPixelLocation</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; Longitude, <span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; Latitude, UTextureRenderTarget2D* RT,</span></span><br><span class="hljs-params"><span class="hljs-function">                                      <span class="hljs-type">const</span> glm::dvec4&amp; GeographicExtents)</span> <span class="hljs-type">const</span></span>;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Modified version of ReadRenderColorPixels</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ReadLinearColorPixelsAsync</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">     FOnRenderTargetRead OnRenderTargetRead,</span></span><br><span class="hljs-params"><span class="hljs-function">     TArray&lt;FTextureRenderTargetResource*&gt; RTs,</span></span><br><span class="hljs-params"><span class="hljs-function">     TArray&lt;TArray&lt;FLinearColor&gt;*&gt; OutImageData,</span></span><br><span class="hljs-params"><span class="hljs-function">     FReadSurfaceDataFlags InFlags = FReadSurfaceDataFlags(</span></span><br><span class="hljs-params"><span class="hljs-function">        RCM_MinMax,</span></span><br><span class="hljs-params"><span class="hljs-function">        CubeFace_MAX),</span></span><br><span class="hljs-params"><span class="hljs-function">     FIntRect InRect = FIntRect(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>),</span></span><br><span class="hljs-params"><span class="hljs-function">     ENamedThreads::Type ExitThread = ENamedThreads::AnyBackgroundThreadNormalTask)</span></span>;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Don&#x27;t run tick update if true.</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-type">bool</span> bIsBuilding = <span class="hljs-literal">false</span>;<br> <br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * @brief Number of frames that have passed after updating foliage.</span><br><span class="hljs-comment">   */</span><br>  int32 Ticks = <span class="hljs-number">0</span>;<br><br>  <span class="hljs-function"><span class="hljs-type">static</span> glm::dvec3 <span class="hljs-title">VectorToDVector</span><span class="hljs-params">(<span class="hljs-type">const</span> FVector&amp; InVector)</span></span>;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p><code>ReadLinearColorPixelsAsync</code>是函数的修改版本，<code>FTextureRenderTargetResource::ReadLinearColorPixels</code>允许我们从多个渲染目标中提取像素而不会阻塞游戏线程。</p>
+<h2 id="FoliageCaptureActor-cpp"><a href="#FoliageCaptureActor-cpp" class="headerlink" title="FoliageCaptureActor.cpp"></a><code>FoliageCaptureActor.cpp</code></h2><p>在这里，我们将实现头文件中声明的函数。</p>
+<h3 id="Includes"><a href="#Includes" class="headerlink" title="Includes"></a>Includes</h3><p>确保包含KismetMathLibrary，因为我们将在此库中使用多个函数。</p>
+<p><code>#include &quot;Kismet/KismetMathLibrary.h&quot;</code></p>
+<h3 id="Tick"><a href="#Tick" class="headerlink" title="Tick"></a>Tick</h3><p>这控制了我们更新每个植物实例的频率。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span> (Ticks &gt; UpdateFoliageAfterNumFrames &amp;&amp; !bIsBuilding)<br>&#123;<br>  Ticks = <span class="hljs-number">0</span>;<br>  int32 ComponentsUpdated = <span class="hljs-number">0</span>;<br><br>  <span class="hljs-keyword">for</span> (TPair&lt;FFoliageGeometryType, TArray&lt;UFoliageHISM*&gt;&gt;&amp; FoliageHISMPair : HISMFoliageMap)<br>  &#123;<br>     <span class="hljs-keyword">for</span> (UFoliageHISM* FoliageHISM : FoliageHISMPair.Value)<br>     &#123;<br>        <span class="hljs-comment">// if (!IsValid(FoliageHISM)) &#123; continue; &#125;</span><br>        <span class="hljs-keyword">if</span> (FoliageHISM-&gt;bMarkedForClear)<br>        &#123;<br>           FoliageHISM-&gt;<span class="hljs-built_in">ClearInstances</span>();<br>           FoliageHISM-&gt;bMarkedForClear = <span class="hljs-literal">false</span>;<br>           ComponentsUpdated++;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (FoliageHISM-&gt;bMarkedForAdd)<br>        &#123;<br>           FoliageHISM-&gt;<span class="hljs-built_in">PreAllocateInstancesMemory</span>(FoliageHISM-&gt;Transforms.<span class="hljs-built_in">Num</span>());<br>           FoliageHISM-&gt;<span class="hljs-built_in">AddInstances</span>(FoliageHISM-&gt;Transforms, <span class="hljs-literal">false</span>);<br>           FoliageHISM-&gt;bMarkedForAdd = <span class="hljs-literal">false</span>;<br>           FoliageHISM-&gt;Transforms.<span class="hljs-built_in">Empty</span>();<br>           ComponentsUpdated++;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (ComponentsUpdated &gt; MaxComponentsToUpdatePerFrame)<br>        &#123;<br>           <span class="hljs-keyword">break</span>;<br>        &#125;<br>     &#125;<br>  &#125;<br>&#125;<br><br>Ticks++;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="BuildFoliageTransforms"><a href="#BuildFoliageTransforms" class="headerlink" title="BuildFoliageTransforms"></a><code>BuildFoliageTransforms</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">AFoliageCaptureActor::BuildFoliageTransforms</span><span class="hljs-params">(UTextureRenderTarget2D* FoliageDistributionMap,</span></span><br><span class="hljs-params"><span class="hljs-function">                                                 UTextureRenderTarget2D* NormalAndDepthMap, FBox RTWorldBounds)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-comment">// Need to check whether the CesiumGeoreference actor and input RTs are valid.</span><br>  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">IsValid</span>(Georeference))<br>  &#123;<br>     <span class="hljs-built_in">UE_LOG</span>(LogTemp, Warning, <span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;Georeference is invalid! Not spawning in foliage&quot;</span>));<br>     <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">IsValid</span>(NormalAndDepthMap) || !<span class="hljs-built_in">IsValid</span>(FoliageDistributionMap))<br>  &#123;<br>     <span class="hljs-built_in">UE_LOG</span>(LogTemp, Warning, <span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;Invaid inputs for FoliageCaptureActor!&quot;</span>));<br>     <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (FoliageTypes.<span class="hljs-built_in">Num</span>() == <span class="hljs-number">0</span>)<br>  &#123;<br>     <span class="hljs-built_in">UE_LOG</span>(LogTemp, Warning, <span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;No foliage types added!&quot;</span>));<br>     <span class="hljs-keyword">return</span>;<br>  &#125;<br> <br>  bIsBuilding = <span class="hljs-literal">true</span>;<br>  <span class="hljs-comment">// Ensure the transforms array on the HISMs are cleared before building.</span><br>  <span class="hljs-keyword">for</span> (TPair&lt;FFoliageGeometryType, TArray&lt;UFoliageHISM*&gt;&gt;&amp; FoliageHISMPair : HISMFoliageMap)<br>  &#123;<br>     <span class="hljs-keyword">for</span> (UFoliageHISM* FoliageHISM : FoliageHISMPair.Value)<br>     &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">IsValid</span>(FoliageHISM))<br>        &#123;<br>           FoliageHISM-&gt;Transforms.<span class="hljs-built_in">Empty</span>();<br>           FoliageHISM-&gt;bMarkedForClear = <span class="hljs-literal">true</span>;<br>        &#125;<br>     &#125;<br>  &#125;<br><br>  <span class="hljs-comment">// Find the geographic bounds of the RT</span><br>  <span class="hljs-type">const</span> glm::dvec3 MinGeographic = Georeference-&gt;<span class="hljs-built_in">TransformUeToLongitudeLatitudeHeight</span>(<br>     glm::<span class="hljs-built_in">dvec3</span>(<br>        RTWorldBounds.Min.X,<br>        RTWorldBounds.Min.Y,<br>        RTWorldBounds.Min.Z<br>     ));<br><br>  <span class="hljs-type">const</span> glm::dvec3 MaxGeographic = Georeference-&gt;<span class="hljs-built_in">TransformUeToLongitudeLatitudeHeight</span>(<br>     glm::<span class="hljs-built_in">dvec3</span>(<br>        RTWorldBounds.Max.X,<br>        RTWorldBounds.Max.Y,<br>        RTWorldBounds.Max.Z<br>     )<br>  );<br>  <span class="hljs-type">const</span> glm::dvec4 GeographicExtents2D = glm::<span class="hljs-built_in">dvec4</span>(<br>     MinGeographic.x, MinGeographic.y,<br>     MaxGeographic.x, MaxGeographic.y<br>  );<br><br>  <span class="hljs-comment">// Setup pixel extraction</span><br>  <span class="hljs-type">const</span> int32 TotalPixels = FoliageDistributionMap-&gt;SizeX * FoliageDistributionMap-&gt;SizeY;<br><br>  TArray&lt;FLinearColor&gt;* ClassificationPixels = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TArray</span>&lt;FLinearColor&gt;();<br>  TArray&lt;FLinearColor&gt;* NormalPixels = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TArray</span>&lt;FLinearColor&gt;();<br><br>  FOnRenderTargetRead OnRenderTargetRead;<br>  OnRenderTargetRead.<span class="hljs-built_in">BindLambda</span>(<br>     [<span class="hljs-keyword">this</span>, FoliageDistributionMap, ClassificationPixels, NormalPixels, GeographicExtents2D, TotalPixels](<br>     <span class="hljs-type">bool</span> bSuccess) <span class="hljs-keyword">mutable</span><br>     &#123;<br>        <span class="hljs-keyword">if</span> (!bSuccess)<br>        &#123;<br>           bIsBuilding = <span class="hljs-literal">false</span>;<br>           <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-type">const</span> int32 Width = FoliageDistributionMap-&gt;SizeX;<br><br>        TMap&lt;UFoliageHISM*, int32&gt; NewInstanceCountMap;<br>        FFoliageTransforms FoliageTransforms;<br>       <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> Index = <span class="hljs-number">0</span>; Index &lt; TotalPixels; ++Index)<br>        &#123;<br>           <span class="hljs-comment">// Get the 2D pixel coordinates.</span><br>           <span class="hljs-type">const</span> <span class="hljs-type">double</span> X = Index % Width;<br>           <span class="hljs-type">const</span> <span class="hljs-type">double</span> Y = Index / Width;<br><br>           <span class="hljs-comment">// Extract classification, normals and depth from the pixel arrays.</span><br>           <span class="hljs-type">const</span> FLinearColor Classification = (*ClassificationPixels)[Index];<br>           <span class="hljs-type">const</span> FLinearColor NormalDepth = (*NormalPixels)[Index];<br>           <span class="hljs-comment">// Convert the RGB channel in the NormalDepth array to a FVector</span><br>           FVector Normal = <span class="hljs-built_in">FVector</span>(NormalDepth.R, NormalDepth.G, NormalDepth.B);<br>           <span class="hljs-comment">// Project the Alpha channel in NormalDepth to elevation (in meters)</span><br>           <span class="hljs-type">const</span> <span class="hljs-type">double</span> Elevation = <span class="hljs-built_in">GetHeightFromDepth</span>(NormalDepth.A);<br><br>           <span class="hljs-comment">// Project pixel coords to geographic.</span><br>           <span class="hljs-type">const</span> glm::dvec3 GeographicCoords = <span class="hljs-built_in">PixelToGeographicLocation</span>(X, Y, Elevation, FoliageDistributionMap,<br>                                                                         GeographicExtents2D);<br>           <span class="hljs-comment">// Then project to UE world coordinates</span><br>           <span class="hljs-type">const</span> glm::dvec3 EngineCoords = Georeference-&gt;<span class="hljs-built_in">TransformLongitudeLatitudeHeightToUe</span>(GeographicCoords);<br><br>           <span class="hljs-comment">// Compute east north up</span><br>           <span class="hljs-type">const</span> FMatrix EastNorthUpEngine = Georeference-&gt;<span class="hljs-built_in">InaccurateComputeEastNorthUpToUnreal</span>(<br>              <span class="hljs-built_in">FVector</span>(EngineCoords.x, EngineCoords.y, EngineCoords.z));<br><br>           <span class="hljs-keyword">for</span> (FFoliageClassificationType&amp; FoliageType : FoliageTypes)<br>           &#123;<br>              <span class="hljs-comment">// If classification pixel color matches the classification of FoliageType</span><br>              <span class="hljs-keyword">if</span> (Classification == FoliageType.ColourClassification)<br>              &#123;<br>                 <span class="hljs-type">bool</span> bHasDoneRaycast = <span class="hljs-literal">false</span>;<br>                 FVector Location = <span class="hljs-built_in">FVector</span>(EngineCoords.x, EngineCoords.y, EngineCoords.z);<br><br>                 <span class="hljs-keyword">if</span> (FoliageType.bAlignToSurfaceWithRaycast)<br>                 &#123;<br>                    <span class="hljs-built_in">CorrectFoliageTransform</span>(Location, EastNorthUpEngine, Location, Normal, bHasDoneRaycast);<br>                 &#125;<br>                 <span class="hljs-comment">// Iterate through the mesh types inside FoliageType</span><br>                 <span class="hljs-keyword">for</span> (FFoliageGeometryType&amp; FoliageGeometryType : FoliageType.FoliageTypes)<br>                 &#123;<br>                    <span class="hljs-keyword">if</span> (FMath::<span class="hljs-built_in">FRand</span>() &gt;= FoliageGeometryType.Density)<br>                    &#123;<br>                       <span class="hljs-keyword">continue</span>;<br>                    &#125;<br><br>                    <span class="hljs-comment">// Find rotation and scale</span><br>                    <span class="hljs-type">const</span> <span class="hljs-type">float</span> Scale = FoliageGeometryType.Scale.<span class="hljs-built_in">Interpolate</span>(FMath::<span class="hljs-built_in">FRand</span>());<br>                    FRotator Rotation;<br>                   <br>                    <span class="hljs-keyword">if</span> (FoliageGeometryType.bAlignToNormal)<br>                    &#123;<br>                       Rotation = UKismetMathLibrary::<span class="hljs-built_in">MakeRotFromZ</span>(Normal);<br>                    &#125; <span class="hljs-keyword">else</span><br>                    &#123;<br>                       Rotation = EastNorthUpEngine.<span class="hljs-built_in">Rotator</span>();<br>                    &#125;<br><br>                    <span class="hljs-comment">// Apply a random angle to the rotation yaw if RandomYaw is true.</span><br>                    <span class="hljs-keyword">if</span> (FoliageGeometryType.bRandomYaw)<br>                    &#123;<br>                       Rotation = UKismetMathLibrary::<span class="hljs-built_in">RotatorFromAxisAndAngle</span>(<br>                          Rotation.<span class="hljs-built_in">Quaternion</span>().<span class="hljs-built_in">GetUpVector</span>(), FMath::<span class="hljs-built_in">FRandRange</span>(<br>                             <span class="hljs-number">0.0</span>, <span class="hljs-number">360.0</span><br>                          ));<br>                    &#125;<br><br>                    <span class="hljs-comment">// Find HISM with minimum amount of transforms.</span><br>                   <br>                    UFoliageHISM* MinimumHISM = HISMFoliageMap[FoliageGeometryType][<span class="hljs-number">0</span>];<br>                    <span class="hljs-keyword">for</span> (UFoliageHISM* HISM : HISMFoliageMap[FoliageGeometryType])<br>                    &#123;<br>                       <span class="hljs-keyword">if</span> (FoliageTransforms.HISMTransformMap.<span class="hljs-built_in">Contains</span>(HISM) &amp;&amp; FoliageTransforms.HISMTransformMap.<span class="hljs-built_in">Contains</span>(MinimumHISM))<br>                       &#123;<br>                          <span class="hljs-keyword">if</span> (FoliageTransforms.HISMTransformMap[HISM].<span class="hljs-built_in">Num</span>() &lt; FoliageTransforms.HISMTransformMap[HISM].<span class="hljs-built_in">Num</span>())<br>                          &#123;<br>                             MinimumHISM = HISM;<br>                          &#125;<br>                       &#125;<br>                    &#125;<br>                    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">IsValid</span>(MinimumHISM))<br>                    &#123;<br>                       <span class="hljs-built_in">UE_LOG</span>(LogTemp, Error, <span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;MinimumHISM is invalid!&quot;</span>));<br>                    &#125;<br><br>                    <span class="hljs-comment">// Add our transform, and make it relative to the actor.</span><br>                    FTransform NewTransform = <span class="hljs-built_in">FTransform</span>(<br>                       Rotation,<br>                       Location + (Rotation.<span class="hljs-built_in">Quaternion</span>().<br>                          <span class="hljs-built_in">GetUpVector</span>() * FoliageGeometryType.ZOffset.<br>                                                              <span class="hljs-built_in">Interpolate</span>(FMath::<span class="hljs-built_in">FRand</span>())), <span class="hljs-built_in">FVector</span>(Scale)<br>                    ).<span class="hljs-built_in">GetRelativeTransform</span>(<span class="hljs-built_in">GetTransform</span>());<br>                    <span class="hljs-keyword">if</span> (NewTransform.<span class="hljs-built_in">IsRotationNormalized</span>())<br>                    &#123;<br>                       <span class="hljs-keyword">if</span> (!FoliageTransforms.HISMTransformMap.<span class="hljs-built_in">Contains</span>(MinimumHISM))<br>                       &#123;<br>                          FoliageTransforms.HISMTransformMap.<span class="hljs-built_in">Add</span>(MinimumHISM, TArray&#123;NewTransform&#125;);<br>                       &#125; <span class="hljs-keyword">else</span><br>                       &#123;<br>                          FoliageTransforms.HISMTransformMap[MinimumHISM].<span class="hljs-built_in">Add</span>(NewTransform);<br>                       &#125;<br>                    &#125;<br>                 &#125;<br>              &#125;<br>           &#125;<br>        &#125;<br>        <span class="hljs-keyword">delete</span> ClassificationPixels;<br>        <span class="hljs-keyword">delete</span> NormalPixels;<br>        ClassificationPixels = <span class="hljs-literal">nullptr</span>;<br>        NormalPixels = <span class="hljs-literal">nullptr</span>;<br><br>        <span class="hljs-built_in">AsyncTask</span>(ENamedThreads::GameThread, [FoliageTransforms, <span class="hljs-keyword">this</span>]()<br>        &#123;<br>           <span class="hljs-comment">// Marked for add</span><br>           <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> TPair&lt;UFoliageHISM*, TArray&lt;FTransform&gt;&gt;&amp; Pair: FoliageTransforms.HISMTransformMap)<br>           &#123;<br>              Pair.Key-&gt;Transforms.<span class="hljs-built_in">Append</span>(Pair.Value);<br>              Pair.Key-&gt;bMarkedForAdd = <span class="hljs-literal">true</span>;<br>           &#125;<br>           bIsBuilding = <span class="hljs-literal">false</span>;<br>        &#125;);<br>     &#125;);<br>  <span class="hljs-comment">// Extract the pixels from the render targets, calling OnRenderTargetRead when complete.</span><br>  <span class="hljs-built_in">ReadLinearColorPixelsAsync</span>(OnRenderTargetRead, TArray&lt;FTextureRenderTargetResource*&gt;&#123;<br>                                FoliageDistributionMap-&gt;<span class="hljs-built_in">GameThread_GetRenderTargetResource</span>(),<br>                                NormalAndDepthMap-&gt;<span class="hljs-built_in">GameThread_GetRenderTargetResource</span>()<br>                             &#125;, TArray&lt;TArray&lt;FLinearColor&gt;*&gt;&#123;<br>                                ClassificationPixels, NormalPixels<br>                             &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="ResetAndCreateHISMComponents"><a href="#ResetAndCreateHISMComponents" class="headerlink" title="ResetAndCreateHISMComponents"></a><code>ResetAndCreateHISMComponents</code></h3><p>这将在 <code>BeginPlay</code> 和<code>PostEditChangeProperty</code>上调用（当修改细节面板中的任何属性时）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">AFoliageCaptureActor::ResetAndCreateHISMComponents</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-keyword">for</span> (FFoliageClassificationType&amp; FoliageType : FoliageTypes)<br>  &#123;<br>     <span class="hljs-keyword">for</span> (FFoliageGeometryType&amp; FoliageGeometryType : FoliageType.FoliageTypes)<br>     &#123;<br>        <span class="hljs-keyword">if</span> (FoliageGeometryType.Mesh == <span class="hljs-literal">nullptr</span>) &#123; <span class="hljs-keyword">continue</span>; &#125;<br>        <span class="hljs-keyword">if</span> (HISMFoliageMap.<span class="hljs-built_in">Contains</span>(FoliageGeometryType))<br>        &#123;<br>           <span class="hljs-keyword">for</span> (UFoliageHISM* HISM : HISMFoliageMap[FoliageGeometryType])<br>           &#123;<br>              <span class="hljs-keyword">if</span> (<span class="hljs-built_in">IsValid</span>(HISM))<br>              &#123;<br>                 HISM-&gt;<span class="hljs-built_in">DestroyComponent</span>();<br>              &#125;<br>           &#125;<br>           HISMFoliageMap[FoliageGeometryType].<span class="hljs-built_in">Empty</span>();<br>        &#125;<br>        HISMFoliageMap.<span class="hljs-built_in">Remove</span>(FoliageGeometryType);<br><br>        <span class="hljs-keyword">for</span> (int32 i = <span class="hljs-number">0</span>; i &lt; FoliageType.PooledHISMsToCreatePerFoliageType; ++i)<br>        &#123;<br>           UFoliageHISM* HISM = <span class="hljs-built_in">NewObject</span>&lt;UFoliageHISM&gt;(<span class="hljs-keyword">this</span>);<br>           HISM-&gt;<span class="hljs-built_in">SetupAttachment</span>(<span class="hljs-built_in">GetRootComponent</span>());<br>           HISM-&gt;<span class="hljs-built_in">RegisterComponent</span>();<br><br>           HISM-&gt;<span class="hljs-built_in">SetStaticMesh</span>(FoliageGeometryType.Mesh);<br>           HISM-&gt;<span class="hljs-built_in">SetCollisionEnabled</span>(FoliageGeometryType.bCollidesWithWorld<br>                                        ? ECollisionEnabled::QueryAndPhysics<br>                                        : ECollisionEnabled::NoCollision);<br>           HISM-&gt;<span class="hljs-built_in">SetCullDistances</span>(FoliageGeometryType.CullingDistances.Min, FoliageGeometryType.CullingDistances.Max);<br><br>           <span class="hljs-comment">// This may cause a slight hitch when enabled.</span><br>           HISM-&gt;bAffectDistanceFieldLighting = FoliageGeometryType.bAffectsDistanceFieldLighting;<br>           <span class="hljs-keyword">if</span> (!HISMFoliageMap.<span class="hljs-built_in">Contains</span>(FoliageGeometryType))<br>           &#123;<br>              HISMFoliageMap.<span class="hljs-built_in">Add</span>(FoliageGeometryType, TArray&lt;UFoliageHISM*&gt;&#123;HISM&#125;);<br>           &#125;<br>           <span class="hljs-keyword">else</span><br>           &#123;<br>              HISMFoliageMap[FoliageGeometryType].<span class="hljs-built_in">Add</span>(HISM);<br>           &#125;<br>        &#125;<br>     &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="GetHeightFromDepth"><a href="#GetHeightFromDepth" class="headerlink" title="GetHeightFromDepth"></a><code>GetHeightFromDepth</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">AFoliageCaptureActor::GetHeightFromDepth</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; Value)</span> <span class="hljs-type">const</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-keyword">return</span> CaptureElevation - (<span class="hljs-number">1</span> - Value) / <span class="hljs-number">0.00001</span> / <span class="hljs-number">100</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="PixelToGeographicCoordinates和GeogrxaphicToPixelCoordinates"><a href="#PixelToGeographicCoordinates和GeogrxaphicToPixelCoordinates" class="headerlink" title="PixelToGeographicCoordinates和GeogrxaphicToPixelCoordinates"></a><code>PixelToGeographicCoordinates</code>和<code>GeogrxaphicToPixelCoordinates</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">glm::dvec3 <span class="hljs-title">AFoliageCaptureActor::PixelToGeographicLocation</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; X, <span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; Y, <span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; Altitude,</span></span><br><span class="hljs-params"><span class="hljs-function">                                                          UTextureRenderTarget2D* RT,</span></span><br><span class="hljs-params"><span class="hljs-function">                                                          <span class="hljs-type">const</span> glm::dvec4&amp; GeographicExtents)</span> <span class="hljs-type">const</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-comment">// Normalize the ranges of the coords</span><br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> AX = X / <span class="hljs-built_in">static_cast</span>&lt;<span class="hljs-type">double</span>&gt;(RT-&gt;SizeX);<br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> AY = Y / <span class="hljs-built_in">static_cast</span>&lt;<span class="hljs-type">double</span>&gt;(RT-&gt;SizeY);<br><br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> Long = FMath::<span class="hljs-built_in">Lerp</span>&lt;<span class="hljs-type">double</span>&gt;(<br>     GeographicExtents.x,<br>     GeographicExtents.z,<br>     <span class="hljs-number">1</span> - AY);<br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> Lat = FMath::<span class="hljs-built_in">Lerp</span>&lt;<span class="hljs-type">double</span>&gt;(<br>     GeographicExtents.y,<br>     GeographicExtents.w,<br>     AX);<br><br>  <span class="hljs-keyword">return</span> glm::<span class="hljs-built_in">dvec3</span>(Long, Lat, Altitude);<br>&#125;<br><br><span class="hljs-function">FIntPoint <span class="hljs-title">AFoliageCaptureActor::GeographicToPixelLocation</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; Longitude, <span class="hljs-type">const</span> <span class="hljs-type">double</span>&amp; Latitude,</span></span><br><span class="hljs-params"><span class="hljs-function">                                                         UTextureRenderTarget2D* RT,</span></span><br><span class="hljs-params"><span class="hljs-function">                                                         <span class="hljs-type">const</span> glm::dvec4&amp; GeographicExtents)</span> <span class="hljs-type">const</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-comment">// Normalize long and lat</span><br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> LongitudeRange = GeographicExtents.z - GeographicExtents.x;<br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> LatitudeRange = GeographicExtents.w - GeographicExtents.y;<br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> ALongitude = (Longitude - GeographicExtents.x) / LongitudeRange;<br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> ALatitude = (Latitude - GeographicExtents.y) / LatitudeRange;<br><br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> X = FMath::<span class="hljs-built_in">Lerp</span>&lt;<span class="hljs-type">double</span>&gt;(<span class="hljs-number">0</span>, RT-&gt;SizeX, ALatitude);<br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> Y = FMath::<span class="hljs-built_in">Lerp</span>&lt;<span class="hljs-type">double</span>&gt;(RT-&gt;SizeY, <span class="hljs-number">0</span>, ALongitude);<br><br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">FIntPoint</span>(X, Y);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="ReadLinearColorPixelsAsync"><a href="#ReadLinearColorPixelsAsync" class="headerlink" title="ReadLinearColorPixelsAsync"></a><code>ReadLinearColorPixelsAsync</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">AFoliageCaptureActor::ReadLinearColorPixelsAsync</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">  FOnRenderTargetRead OnRenderTargetRead,</span></span><br><span class="hljs-params"><span class="hljs-function">  TArray&lt;FTextureRenderTargetResource*&gt; RTs,</span></span><br><span class="hljs-params"><span class="hljs-function">  TArray&lt;TArray&lt;FLinearColor&gt;*&gt; OutImageData,</span></span><br><span class="hljs-params"><span class="hljs-function">  FReadSurfaceDataFlags InFlags,</span></span><br><span class="hljs-params"><span class="hljs-function">  FIntRect InRect,</span></span><br><span class="hljs-params"><span class="hljs-function">  ENamedThreads::Type ExitThread)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-keyword">if</span> (InRect == <span class="hljs-built_in">FIntRect</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))<br>  &#123;<br>     InRect = <span class="hljs-built_in">FIntRect</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, RTs[<span class="hljs-number">0</span>]-&gt;<span class="hljs-built_in">GetSizeXY</span>().X, RTs[<span class="hljs-number">0</span>]-&gt;<span class="hljs-built_in">GetSizeXY</span>().Y);<br>  &#125;<br> <br> <br>  <span class="hljs-keyword">struct</span> <span class="hljs-title class_">FReadSurfaceContext</span><br>  &#123;<br>     TArray&lt;FTextureRenderTargetResource*&gt; SrcRenderTargets;<br>     TArray&lt;TArray&lt;FLinearColor&gt;*&gt; OutData;<br>     FIntRect Rect;<br>     FReadSurfaceDataFlags Flags;<br>  &#125;;<br><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> DT : OutImageData) &#123; DT-&gt;<span class="hljs-built_in">Reset</span>(); &#125;<br>  FReadSurfaceContext Context =<br>  &#123;<br>     RTs,<br>     OutImageData,<br>     InRect,<br>     InFlags<br>  &#125;;<br><br>  <span class="hljs-keyword">if</span> (!Context.OutData[<span class="hljs-number">0</span>])<br>  &#123;<br>     <span class="hljs-built_in">UE_LOG</span>(LogTemp, Error, <span class="hljs-built_in">TEXT</span>(<span class="hljs-string">&quot;Buffer invalid!&quot;</span>));<br>     <span class="hljs-keyword">return</span>;<br>  &#125;<br><br>  <span class="hljs-built_in">ENQUEUE_RENDER_COMMAND</span>(ReadSurfaceCommand)(<br>     [Context, OnRenderTargetRead, ExitThread](FRHICommandListImmediate&amp; RHICmdList)<br>     &#123;<br>        <span class="hljs-type">const</span> FIntRect Rect = Context.Rect;<br>        <span class="hljs-type">const</span> FReadSurfaceDataFlags Flags = Context.Flags;<br>        <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (FRenderTarget* RT : Context.SrcRenderTargets)<br>        &#123;<br>           <span class="hljs-type">const</span> FTexture2DRHIRef&amp; RefRenderTarget = RT-&gt;<br>              <span class="hljs-built_in">GetRenderTargetTexture</span>();<br>           TArray&lt;FLinearColor&gt;* Buffer = Context.OutData[i];<br><br>           RHICmdList.<span class="hljs-built_in">ReadSurfaceData</span>(<br>              RefRenderTarget,<br>              Rect,<br>              *Buffer,<br>              Flags<br>           );<br>           i++;<br>        &#125;<br>        <span class="hljs-comment">// instead of blocking the game thread, execute the delegate when finished.</span><br>        <span class="hljs-built_in">AsyncTask</span>(<br>           ExitThread,<br>           [OnRenderTargetRead, Context]()<br>           &#123;<br>              OnRenderTargetRead.<span class="hljs-built_in">Execute</span>((*Context.OutData[<span class="hljs-number">0</span>]).<span class="hljs-built_in">Num</span>() &gt; <span class="hljs-number">0</span>);<br>           &#125;);<br>     &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="VectorToDVector"><a href="#VectorToDVector" class="headerlink" title="VectorToDVector"></a><code>VectorToDVector</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">glm::dvec3 <span class="hljs-title">AFoliageCaptureActor::VectorToDVector</span><span class="hljs-params">(<span class="hljs-type">const</span> FVector&amp; InVector)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-keyword">return</span> glm::<span class="hljs-built_in">dvec3</span>(InVector.X, InVector.Y, InVector.Z);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="OnUpdate"><a href="#OnUpdate" class="headerlink" title="OnUpdate"></a><code>OnUpdate</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">AFoliageCaptureActor::OnUpdate_Implementation</span><span class="hljs-params">(<span class="hljs-type">const</span> FVector&amp; NewLocation)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-comment">// Align the actor to face the planet surface.</span><br>  <span class="hljs-built_in">SetActorLocation</span>(NewLocation);<br><br>  <span class="hljs-type">const</span> FRotator PlanetAlignedRotation = Georeference-&gt;<span class="hljs-built_in">InaccurateComputeEastNorthUpToUnreal</span>(NewLocation).<span class="hljs-built_in">Rotator</span>();<br><br>  <span class="hljs-built_in">SetActorRotation</span>(<br>     PlanetAlignedRotation<br>  );<br><br>  <span class="hljs-comment">// Get grid min and max coords.</span><br>  <span class="hljs-type">const</span> int32 Size = GridSize.X &gt; <span class="hljs-number">0</span> ? GridSize.X : <span class="hljs-number">1</span>;<br>  <span class="hljs-type">const</span> FVector Start = <span class="hljs-built_in">GetActorTransform</span>().<span class="hljs-built_in">TransformPosition</span>(<span class="hljs-built_in">FVector</span>(-(CaptureWidth * Size) / <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>));<br>  <span class="hljs-type">const</span> FVector End = <span class="hljs-built_in">GetActorTransform</span>().<span class="hljs-built_in">TransformPosition</span>(<span class="hljs-built_in">FVector</span>((CaptureWidth * Size) / <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>));<br><br>  <span class="hljs-comment">// Find the distance (in degrees) between the grid min and max.</span><br>  glm::dvec3 GeoStart = Georeference-&gt;<span class="hljs-built_in">TransformUeToLongitudeLatitudeHeight</span>(<span class="hljs-built_in">VectorToDVector</span>(Start));<br>  glm::dvec3 GeoEnd = Georeference-&gt;<span class="hljs-built_in">TransformUeToLongitudeLatitudeHeight</span>(<span class="hljs-built_in">VectorToDVector</span>(End));<br> <br>  GeoStart.z = CaptureElevation;<br>  GeoEnd.z = CaptureElevation;<br> <br>  CaptureWidthInDegrees = glm::<span class="hljs-built_in">distance</span>(GeoStart, GeoEnd) / <span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="IsBuilding"><a href="#IsBuilding" class="headerlink" title="IsBuilding"></a><code>IsBuilding</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">AFoliageCaptureActor::IsBuilding</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-keyword">return</span> bIsBuilding;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="CorrectFoliageTransform"><a href="#CorrectFoliageTransform" class="headerlink" title="CorrectFoliageTransform"></a><code>CorrectFoliageTransform</code></h3><p><strong><code>InEngineCoordinates</code></strong> - 从 RT 投影的实例的原始位置。</p>
+<p><strong><code>InEastNorthUp</code></strong> - 用于将实例定向到行星表面的旋转矩阵。</p>
+<p><strong><code>OutCorrectedPosition</code></strong> - 这是光线的命中位置，对瓦片的碰撞网格体进行碰撞检测。</p>
+<p><strong><code>表面法线</code></strong> - 如果启用了光线投射，则光线的表面法线将替换 RT 中的法线。</p>
+<p><strong><code>bSuccess</code></strong> - 如果存在阻止命中，则设置为 true，否则设置为 false。在<code>BuildFoliageTransforms</code> 中，如果这是假的，我们将回退到近似法线和位置。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">AFoliageCaptureActor::CorrectFoliageTransform</span><span class="hljs-params">(<span class="hljs-type">const</span> FVector&amp; InEngineCoordinates, <span class="hljs-type">const</span> FMatrix&amp; InEastNorthUp,</span></span><br><span class="hljs-params"><span class="hljs-function">  FVector&amp; OutCorrectedPosition, FVector&amp; OutSurfaceNormals, <span class="hljs-type">bool</span>&amp; bSuccess)</span> <span class="hljs-type">const</span></span><br><span class="hljs-function"></span>&#123;<br>  UWorld* World = <span class="hljs-built_in">GetWorld</span>();<br><br>  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">IsValid</span>(World))<br>  &#123;<br>     <span class="hljs-type">const</span> FVector Up = InEastNorthUp.<span class="hljs-built_in">ToQuat</span>().<span class="hljs-built_in">GetUpVector</span>();<br>     FHitResult HitResult;<br>    <br>     World-&gt;<span class="hljs-built_in">LineTraceSingleByChannel</span>(HitResult, InEngineCoordinates + (Up * <span class="hljs-number">6000</span>),<br>        InEngineCoordinates - (Up * <span class="hljs-number">6000</span>), ECollisionChannel::ECC_Visibility);<br>    <br>     <span class="hljs-keyword">if</span> (HitResult.bBlockingHit)<br>     &#123;<br>        bSuccess = <span class="hljs-literal">true</span>;<br>        OutCorrectedPosition = HitResult.ImpactPoint;<br>        OutSurfaceNormals = HitResult.ImpactNormal;<br>     &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="FoliageHISM-h"><a href="#FoliageHISM-h" class="headerlink" title="FoliageHISM.h"></a><code>FoliageHISM.h</code></h2><p>**<code>Transforms</code><strong>是要在下一帧添加的实例</strong><code>转换</code>**数组。</p>
+<p><strong><code>bMarkedForAdd</code></strong> 是一个标志，用于确定此组件是否具有要添加的实例。</p>
+<p><strong><code>bMarkedForClear</code></strong> 是一个标志，用于确定是否应在下一帧清除实例。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">public</span>:<br>  <span class="hljs-built_in">UPROPERTY</span>()<br>  TArray&lt;FTransform&gt; Transforms;<br><br>  <span class="hljs-built_in">UPROPERTY</span>()<br>  <span class="hljs-type">bool</span> bMarkedForAdd = <span class="hljs-literal">false</span>;<br><br>  <span class="hljs-built_in">UPROPERTY</span>()<br>  <span class="hljs-type">bool</span> bMarkedForClear = <span class="hljs-literal">false</span>;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Step-2-Niagara-创建-Niagara-函数脚本"><a href="#Step-2-Niagara-创建-Niagara-函数脚本" class="headerlink" title="Step 2: Niagara: 创建 Niagara 函数脚本"></a>Step 2: Niagara: 创建 Niagara 函数脚本</h2><p>分类器将在Niagara构建，它提供对<strong>RenderTargets</strong>的写入访问，并且比常规材质具有更大的灵活性。</p>
+<p><strong>1.<strong>在虚幻编辑器的内容</strong>浏览器中</strong>，右键单击以打开上下文菜单，将鼠标悬停在FX上，然后选择<strong>Niagara函数脚本</strong>。在本教程中，它将命名为“NF_DetermineFoliageType”。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216115254791.png" srcset="/img/loading.gif" lazyload alt="image-20230216115254791"></p>
+<p><strong>2.<strong>打开资源并将“</strong>Library Visibility</strong>”设置为<strong>“Exposed</strong>”。这使得该功能可以在Niagara编辑器上下文菜单中访问。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216115633735.png" srcset="/img/loading.gif" lazyload alt="image-20230216115633735"></p>
+<p>**3.**创建输入：</p>
+<ul>
+<li><strong>Input Data</strong> - 后处理的输入影像。- <strong>Vector4</strong></li>
+<li><strong>If False</strong> - 如果遮罩条件返回假，则为像素颜色。- <strong>Vector4</strong></li>
+<li><strong>If True</strong> - 如果遮罩条件返回 true，则为像素颜色。- <strong>Vector4</strong></li>
+<li><strong>Power</strong> - 对比度强度 - <strong>float</strong></li>
+<li><strong>Bias</strong> - 掩码值，如果<code>Input Data.Y^Power</code>&gt;<code>Bias</code>，则返回 <code>If True</code>- <strong>float</strong></li>
+</ul>
+<p>**4.**Create Outputs:</p>
+<ul>
+<li><strong>Output Color -</strong> 分类颜色. - <strong>Vector4</strong></li>
+</ul>
+<p><em>注： 输入节点的名称也可以在右侧详细信息面板中设置：</em></p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216135818470.png" srcset="/img/loading.gif" lazyload alt="image-20230216135818470"></p>
+<p>**5.**在节点图中，设置函数，如下面的屏幕截图所示。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216135929936.png" srcset="/img/loading.gif" lazyload alt="image-20230216135929936"></p>
+<p><strong>6.<strong>单击</strong>编译</strong>，<strong>应用</strong>和<strong>保存</strong>，以便我们可以在将创建的Niagara系统中使用该函数。</p>
+<h2 id="Step-3-Niagara：创建一个NiagaraSystem"><a href="#Step-3-Niagara：创建一个NiagaraSystem" class="headerlink" title="Step 3: Niagara：创建一个NiagaraSystem"></a>Step 3: Niagara：创建一个NiagaraSystem</h2><p>**1.**创建空的 <strong>Niagara System</strong> 并命名为 “NS_FoliageAnalysis”.</p>
+<p>**2.**在Niagara系统中，添加以下用户公开的参数：</p>
+<ul>
+<li><code>RT_Normals</code>- 纹理渲染目标</li>
+<li><code>RT_Output</code>- 纹理渲染目标</li>
+<li><code>TS_Depth</code>- 纹理样本</li>
+<li><code>TS_Imagery</code>- 纹理样本</li>
+<li><code>TS_Normals</code> - 纹理样本</li>
+</ul>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216140332898.png" srcset="/img/loading.gif" lazyload alt="image-20230216140332898"></p>
+<p><strong>3.<strong>接下来，右键单击并选择</strong>添加发射器</strong>。我们将使用<strong>完全空</strong>模板。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216140535714.png" srcset="/img/loading.gif" lazyload alt="image-20230216140535714"></p>
+<p><strong>4.<strong>选择发射器后，将</strong>Sim Target</strong>设置为 <strong>Sim Target</strong>，启用<strong>Local Space</strong>，并将 <strong>Fixed Bounds</strong>设置为：</p>
+<ul>
+<li>最小：“0， 0， 0”</li>
+<li>最大：“1024， 1024， 1”</li>
+</ul>
+<p><strong>5.<strong>我们将使用 Simulation stage，可以通过展开 <strong>simulation stages</strong>菜单来启用，勾选</strong>Enable Simulation Stages (Experimental)</strong>.</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216141110698.png" srcset="/img/loading.gif" lazyload alt="image-20230216141110698"></p>
+<p>**6.**按如下方式设置发射器属性：</p>
+<ul>
+<li><strong>Data</strong> - Grid2DCollection </li>
+<li><strong>RTDI_Normals</strong> - Render Target 2D</li>
+<li><strong>RTDI_Output</strong> - Render Target 2D</li>
+</ul>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216141216586.png" srcset="/img/loading.gif" lazyload alt="image-20230216141216586"></p>
+<p><strong>7.<strong>将 RTDI 参数拖放到</strong>发射器生成中</strong>. 因为我们不会创建飞行的渲染目标, 设置 <strong>Render Target User Parameter</strong> 为相应的 <code>RT_user</code> 参数.</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216141742149.png" srcset="/img/loading.gif" lazyload alt="image-20230216141742149"></p>
+<p><strong>8. <strong>拖放</strong>Data</strong>参数 到Emitter Spawn. <strong>Num Cells X</strong> 和<strong>Num Cells Y</strong> 都设置成 512. 它们需要与<strong>input render targets</strong>的宽度和高度相同. 目前，栅格集合将只存放像素的分类, so <strong>Num Attributes</strong> 可以设为 “1”.</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216142453308.png" srcset="/img/loading.gif" lazyload alt="image-20230216142453308"></p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216142512512.png" srcset="/img/loading.gif" lazyload alt="image-20230216142512512"></p>
+<p><strong>9.<strong>创建一个 simulation stage并将其命名为“Build Foliage Classifications”。将</strong>Iteration Source</strong>设置为<strong>Data Interface</strong>。将数据 <strong>Data Interface</strong>设置为EMITTER。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216142722387.png" srcset="/img/loading.gif" lazyload alt="image-20230216142722387"></p>
+<p><strong>10.<strong>通过单击 <strong>Build Foliage Classifications</strong>模块上的绿色添加按钮来创建</strong>Scratchpad</strong> 。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216144448446.png" srcset="/img/loading.gif" lazyload alt="image-20230216144448446"></p>
+<p><strong>Scratch Pad Module</strong>将包含代码，其中每个像素将被分类并分配给数据网格</p>
+<p>在模块的输入中，添加三个纹理示例参数：</p>
+<ul>
+<li>“Imagery Sample”</li>
+<li>“Normals Sample”</li>
+<li>“Depth Sample”</li>
+</ul>
+<p>该模块还将具有以下发射器属性：</p>
+<ul>
+<li>数据</li>
+<li>RTDI_Output</li>
+</ul>
+<p>单击<strong>应用</strong>以保存上述更改并将其编译到scratchpad。</p>
+<p>然后，模块属性和输入面板应如下所示：</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216144919958.png" srcset="/img/loading.gif" lazyload alt="image-20230216144919958"></p>
+<p>接下来，将scratchpad设置为具有与下面相同的图形设置。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216145102832.png" srcset="/img/loading.gif" lazyload alt="image-20230216145102832"></p>
+<p><code>NF_DetermineFoliageType</code>通过稍微调整参数，可以重复使用该函数对多种类型的植被进行分类。</p>
+<p>在此图中，的第一个实例<code>NF_DetermineFoliageType</code>用于近似放置树木的位置。它对绿色通道的容忍度较低，因此<strong>Bias</strong> 设置较低。</p>
+<p><strong>Power</strong>设置控制输入数据的对比度强度，其中绿色值将更突出，从而被masked。</p>
+<p>第二个实例是第一个实例的更宽容版本，它会导致更大的黄色像素团块。</p>
+<p>下面的mask是一个示例分类，其中：</p>
+<ul>
+<li>绿色 （0， 255， 0） 是树冠</li>
+<li>黄色（255，255，0）是较小的植被体（灌木，草）。</li>
+</ul>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216151908433.png" srcset="/img/loading.gif" lazyload alt="image-20230216151908433"></p>
+<p><strong>11</strong>Niagara发射器需要一个发射器状态模块和粒子生成节点。现在，使用<strong>网格中的生成粒子</strong>模块进行以下设置：</p>
+<ul>
+<li>X 计数：512</li>
+<li>Y 计数：512</li>
+<li>Z 计数：1</li>
+</ul>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216151936025.png" srcset="/img/loading.gif" lazyload alt="image-20230216151936025"></p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216152030011.png" srcset="/img/loading.gif" lazyload alt="image-20230216152030011"></p>
+<p>在<strong>Particle Spawn</strong>下，添加具有默认设置的 <strong>Grid Location</strong>模块。</p>
+<h3 id="高程和法线"><a href="#高程和法线" class="headerlink" title="高程和法线"></a>高程和法线</h3><p>估算高程的更方便的方法是使用场景深度缓冲区。深度缓冲区中的值是绝对值，因此我们需要将这些值乘以一个小数 （0.00001） 以使它们保持在 0.0 和 1.0 的范围内。</p>
+<p>然后，它将被反转，因此最靠近相机的像素将具有较高的值，而较远的像素具有较低的值;这为我们提供了 alpha 值，可用于在 0 米的高程和捕获的高程之间进行插值。</p>
+<p>归一化高程值将存储在 RT_Normals 的 alpha 通道中。</p>
+<p>**12.**创建名为“Setup Elevation”的第二个仿真面板。它将具有与第一个面板相同的设置。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216152755952.png" srcset="/img/loading.gif" lazyload alt="image-20230216152755952"></p>
+<p><strong>13.<strong>在模仿真面板创建一个名为“SetElevation”的</strong>Scratch Pad Module</strong>，具有以下输入：</p>
+<ul>
+<li><strong>RTDI_Normals</strong> - <em>来源于发射器属性</em></li>
+<li><strong>Data</strong> - <em>来源于发射器属性</em></li>
+<li><strong>TS_Depth</strong> - 纹理示例</li>
+<li><strong>TS_Normals</strong> - 纹理示例</li>
+</ul>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216153219463.png" srcset="/img/loading.gif" lazyload alt="image-20230216153219463"></p>
+<p><strong>14.<strong>创建两个</strong>Sample Texture 2D</strong>节点并将它们连接到 <code>TS_Normals</code>和 <code>TS_Depth</code>。创建<strong>Execution Index to Unit</strong>节点并将其连接到 UV。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216153427378.png" srcset="/img/loading.gif" lazyload alt="image-20230216153427378"></p>
+<p><strong>15.<strong>我们只需要法线的 XYZ 分量和场景深度的 X 分量。创建一个新的</strong>Make Linear Color</strong>节点，并连接相应的 XYZ 组件。alpha 分量将为“1 - 深度 X * 0.00001”。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216153639219.png" srcset="/img/loading.gif" lazyload alt="image-20230216153639219"></p>
+<p><strong>16.</strong> <strong>Normals + Elevation</strong> 的输出连接到 <strong>Set Render Target Value</strong> 节点.创建一个 <strong>Linear to Index</strong> 节点，其中Grid的输入是 发射器属性中的<strong>Data</strong>  并且 linear输入是<strong>Execution Index</strong>.</p>
+<p><img src="C:\Users\sxtc\AppData\Roaming\Typora\typora-user-images\image-20230216153820029.png" srcset="/img/loading.gif" lazyload alt="image-20230216153820029"></p>
+<p>发射器现在应如下所示：</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216154737884.png" srcset="/img/loading.gif" lazyload alt="image-20230216154737884"></p>
+<h2 id="Step-4-设置呈现目标"><a href="#Step-4-设置呈现目标" class="headerlink" title="Step 4: 设置呈现目标"></a>Step 4: 设置呈现目标</h2><p><strong>Render Targets 渲染目标</strong>（RTs） 提供了一种直观的方法来与GPU交互数据。与常规纹理不同，RTs 可以在运行时修改，这使得它们非常适合侵蚀模拟和高度贴图生成等用例。</p>
+<p>在内容浏览器中，右键单击并转到<strong>材质和纹理（Materials &amp; Textures）</strong>，然后选择<strong>渲染目标Render Target</strong>。</p>
+<p>我们将使用以下设置创建四个渲染目标：</p>
+<h4 id="RT-Classifications"><a href="#RT-Classifications" class="headerlink" title="RT_Classifications"></a><code>RT_Classifications</code></h4><ul>
+<li>尺寸： 512x512</li>
+<li>渲染目标格式：<code>RTF_RGBA16f</code></li>
+</ul>
+<h4 id="RT-Depth"><a href="#RT-Depth" class="headerlink" title="RT_Depth"></a><code>RT_Depth</code></h4><ul>
+<li>尺寸： 512x512</li>
+<li>渲染目标格式：<code>RTF_R32f</code></li>
+</ul>
+<h4 id="RT-Imagery"><a href="#RT-Imagery" class="headerlink" title="RT_Imagery"></a><code>RT_Imagery</code></h4><ul>
+<li>尺寸： 512x512</li>
+<li>渲染目标格式：<code>RTF_RGBA16f</code></li>
+</ul>
+<h4 id="RT-Normals"><a href="#RT-Normals" class="headerlink" title="RT_Normals"></a><code>RT_Normals</code></h4><ul>
+<li>尺寸： 512x512</li>
+<li>渲染目标格式：<code>RTF_RGBA16f</code></li>
+</ul>
+<p>创建渲染目标后，在<code>NS_FoliageAnalysis</code> 中设置纹理输入的默认值。</p>
+<p>选择scratch模块，并将输入进行链接。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216155649914.png" srcset="/img/loading.gif" lazyload alt="image-20230216155649914"></p>
+<h2 id="测试渲染目标"><a href="#测试渲染目标" class="headerlink" title="测试渲染目标"></a>测试渲染目标</h2><p>要检查Niagara粒子系统和渲染目标是否已正确设置，请将<strong>场景捕捉2DActor</strong>拖放到场景中。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216155910599.png" srcset="/img/loading.gif" lazyload alt="image-20230216155910599"></p>
+<p>将<strong>TextureTarget</strong>设置为<code>RT_Imagery</code> 、<strong>Ortho Width</strong> 设置为 65536，并将<strong>Capture Source</strong>为最终颜色 （HDR）。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216160058923.png" srcset="/img/loading.gif" lazyload alt="image-20230216160058923"></p>
+<p>接下来，将Niagara组件添加到Actor，并将<code>NS_FoliageAnalysis</code>设置为Niagara系统资产。</p>
+<p>然后，输出 RT （<code>RT_Classifications</code>） 应动态更新，结果如下所示：</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216160611248.png" srcset="/img/loading.gif" lazyload alt="image-20230216160611248"></p>
+<p>如果成功，则可以删除新放置的Actor，以便最终结果不会被Actor覆盖。</p>
+<h2 id="Step-5-ProceduralFoliageEllipsoid"><a href="#Step-5-ProceduralFoliageEllipsoid" class="headerlink" title="Step 5: ProceduralFoliageEllipsoid"></a>Step 5: <code>ProceduralFoliageEllipsoid</code></h2><p><strong>1.<strong>最后，创建一个名为“ProceduralFoliageEllipsoid”的 <strong>Cesium3DTileset</strong> C++子类。该Actor将检查玩家是否已移动到树叶捕获半径之外，如果是，将更新</strong>FoliageCaptureActor</strong>。</p>
+<p>**2.**创建后，打开头文件并include FoliageCaptureActor.h<code>#include &quot;FoliageCaptureActor.h&quot;</code></p>
+<p>**3.**在 <code>AProceduralFoliageEllipsoid</code> 类内部, 声明以下变量和函数:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">public</span>:<br>  <span class="hljs-built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, Category = <span class="hljs-string">&quot;Foliage&quot;</span>)<br>     AFoliageCaptureActor* FoliageCaptureActor;<br><br>  <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">Tick</span><span class="hljs-params">(<span class="hljs-type">float</span> DeltaSeconds)</span> <span class="hljs-keyword">override</span></span>;<br><br><span class="hljs-keyword">protected</span>:<br>  <span class="hljs-comment">// Initial spawn</span><br>  <span class="hljs-type">bool</span> bHasFoliageSpawned = <span class="hljs-literal">false</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>**4.**在.cpp文件中，通过调用父函数来定义tick函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Kismet/GameplayStatics.h&quot;</span></span><br><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">AProceduralFoliageEllipsoid::Tick</span><span class="hljs-params">(<span class="hljs-type">float</span> DeltaSeconds)</span></span><br><span class="hljs-function"></span>&#123;<br>  Super::<span class="hljs-built_in">Tick</span>(DeltaSeconds);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>**5.**在tick函数中，实现以下代码片段：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">IsValid</span>(Georeference) &amp;&amp; <span class="hljs-built_in">IsValid</span>(FoliageCaptureActor))<br>&#123;<br>  <span class="hljs-comment">// Don&#x27;t start another build while the previous one is still running</span><br>  <span class="hljs-keyword">if</span> (!FoliageCaptureActor-&gt;<span class="hljs-built_in">IsBuilding</span>())<br>  &#123;<br>     APlayerCameraManager* CameraManager = UGameplayStatics::<span class="hljs-built_in">GetPlayerCameraManager</span>(<span class="hljs-keyword">this</span>, <span class="hljs-number">0</span>);<br>     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">IsValid</span>(CameraManager))<br>     &#123;<br>        <span class="hljs-comment">// Project the camera coordinates to geographic coordinates.</span><br>        <span class="hljs-type">const</span> FVector CameraLocation = CameraManager-&gt;<span class="hljs-built_in">GetCameraLocation</span>();<br>        glm::dvec3 GeographicCameraLocation = Georeference-&gt;<span class="hljs-built_in">TransformUeToLongitudeLatitudeHeight</span>(<br>           glm::<span class="hljs-built_in">dvec3</span>(CameraLocation.X, CameraLocation.Y, CameraLocation.Z));<br><br>        <span class="hljs-comment">// Keep original camera elevation as a variable, and swap z with the capture elevation (this will be the new capture location).</span><br>        <span class="hljs-type">const</span> <span class="hljs-type">double</span> CurrentCameraElevation = GeographicCameraLocation.z;<br>        GeographicCameraLocation.z = FoliageCaptureActor-&gt;CaptureElevation;<br><br>        <span class="hljs-comment">// Ensure CesiumGeoreference is valid</span><br>        <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">IsValid</span>(FoliageCaptureActor-&gt;Georeference))<br>        &#123;<br>           FoliageCaptureActor-&gt;Georeference = Georeference;<br>        &#125;<br>    <br>        <span class="hljs-comment">// Current geographic location of the foliage capture actor (used to measure the distance).</span><br>        <span class="hljs-type">const</span> glm::dvec3 CurrentFoliageCaptureGeographicLocation = Georeference-&gt;<span class="hljs-built_in">TransformUeToLongitudeLatitudeHeight</span>(glm::<span class="hljs-built_in">dvec3</span>(<br>           FoliageCaptureActor-&gt;<span class="hljs-built_in">GetActorLocation</span>().X, FoliageCaptureActor-&gt;<span class="hljs-built_in">GetActorLocation</span>().Y, FoliageCaptureActor-&gt;<span class="hljs-built_in">GetActorLocation</span>().Z<br>        ));<br><br>        <span class="hljs-type">const</span> <span class="hljs-type">double</span> Distance = glm::<span class="hljs-built_in">distance</span>(GeographicCameraLocation, CurrentFoliageCaptureGeographicLocation);<br>        <span class="hljs-type">const</span> <span class="hljs-type">double</span> Speed = CameraManager-&gt;<span class="hljs-built_in">GetVelocity</span>().<span class="hljs-built_in">Size</span>();<br><br>        <span class="hljs-comment">// New capture position</span><br>        <span class="hljs-type">const</span> glm::dvec3 NewFoliageCaptureUELocation = Georeference-&gt;<span class="hljs-built_in">TransformLongitudeLatitudeHeightToUe</span>(GeographicCameraLocation);<br><br>        <span class="hljs-comment">// Only update the foliage capture actor if the player is outside of the capture grid, within elevation, and a speed less than 5000.</span><br>        <span class="hljs-keyword">if</span> ((Distance &gt; FoliageCaptureActor-&gt;CaptureWidthInDegrees &amp;&amp; CurrentCameraElevation &lt;= FoliageCaptureActor-&gt;CaptureElevation &amp;&amp; Speed &lt; <span class="hljs-number">5000</span>) || !bHasFoliageSpawned)<br>        &#123;<br>           FoliageCaptureActor-&gt;<span class="hljs-built_in">OnUpdate</span>(<span class="hljs-built_in">FVector</span>(NewFoliageCaptureUELocation.x, NewFoliageCaptureUELocation.y, NewFoliageCaptureUELocation.z));<br>           bHasFoliageSpawned = <span class="hljs-literal">true</span>;<br>        &#125;<br>     &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面的代码片段运行每一帧，检查播放器的位置以及它是否已移动到捕获半径之外。为了提高性能，如果玩家以超过每秒 5000 个单位的速度移动或高于捕获高度，树叶将不会更新。</p>
+<h2 id="Step-6-创建Actor蓝图"><a href="#Step-6-创建Actor蓝图" class="headerlink" title="Step 6: 创建Actor蓝图"></a>Step 6: 创建Actor蓝图</h2><p>使用程序化叶子椭球体作为父Actor创建一个<strong>蓝图Actor</strong>：</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216161542328.png" srcset="/img/loading.gif" lazyload alt="image-20230216161542328"></p>
+<p>将程序化植物椭球体的新 BP 子类拖到场景中，并在剔除设置下取消勾选视<strong>Frustrum culling</strong>。这可确保玩家周围的磁贴对捕获组件可见。</p>
+<h3 id="BP-FoliageCaptureActor"><a href="#BP-FoliageCaptureActor" class="headerlink" title="BP_FoliageCaptureActor"></a><strong>BP_FoliageCaptureActor</strong></h3><p>打开<strong>BP_FoliageCaptureActor</strong>并将以下包含设置的组件添加到Actor：</p>
+<h4 id="Scene-Scene-Component"><a href="#Scene-Scene-Component" class="headerlink" title="Scene (Scene Component)"></a>Scene (Scene Component)</h4><h5 id="Imagery-Scene-Capture-Component-2D"><a href="#Imagery-Scene-Capture-Component-2D" class="headerlink" title="Imagery (Scene Capture Component 2D)"></a>Imagery (Scene Capture Component 2D)</h5><ul>
+<li>Projection Type: Orthographic</li>
+<li>Texture Target: <code>RT_Imagery</code></li>
+<li>Capture Source: BaseColor in RGB</li>
+<li>Capture Every Frame: false</li>
+<li>Capture On Movement: false</li>
+</ul>
+<h5 id="Normals-Scene-Capture-Component-2D"><a href="#Normals-Scene-Capture-Component-2D" class="headerlink" title="Normals (Scene Capture Component 2D)"></a>Normals (Scene Capture Component 2D)</h5><ul>
+<li>Projection Type: Orthographic</li>
+<li>Texture Target: <code>RT_Normals</code></li>
+<li>Capture Source: Normal in RGB</li>
+<li>Capture Every Frame: false</li>
+<li>Capture On Movement: false</li>
+</ul>
+<h5 id="Depth-Scene-Capture-Component-2D"><a href="#Depth-Scene-Capture-Component-2D" class="headerlink" title="Depth (Scene Capture Component 2D)"></a>Depth (Scene Capture Component 2D)</h5><ul>
+<li>Projection Type: Orthographic</li>
+<li>Texture Target: <code>RT_Depth</code></li>
+<li>Capture Source: Scene Depth in R</li>
+<li>Capture Every Frame: false</li>
+<li>Capture On Movement: false</li>
+</ul>
+<h4 id="Niagara"><a href="#Niagara" class="headerlink" title="Niagara"></a>Niagara</h4><ul>
+<li>Niagara System Asset: <code>NS_FoliageAnalysis</code></li>
+</ul>
+<p>Ensure the components are parented as in the image below.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">下面是整体的中文翻译<br></code></pre></td></tr></table></figure>
+
+<h4 id="场景（场景组件）"><a href="#场景（场景组件）" class="headerlink" title="场景（场景组件）"></a>场景（场景组件）</h4><h5 id="影像（场景捕捉组件-2D）"><a href="#影像（场景捕捉组件-2D）" class="headerlink" title="影像（场景捕捉组件 2D）"></a>影像（场景捕捉组件 2D）</h5><ul>
+<li>投影类型：正交投影</li>
+<li>纹理目标：<code>RT_Imagery</code></li>
+<li>捕获源：RGB 中的基色</li>
+<li>捕获每一帧：假</li>
+<li>移动时捕获：假</li>
+</ul>
+<h5 id="法线（场景捕捉组件-2D）"><a href="#法线（场景捕捉组件-2D）" class="headerlink" title="法线（场景捕捉组件 2D）"></a>法线（场景捕捉组件 2D）</h5><ul>
+<li>投影类型：正交投影</li>
+<li>纹理目标：<code>RT_Normals</code></li>
+<li>捕获源：RGB 中的正常</li>
+<li>捕获每一帧：假</li>
+<li>移动时捕获：假</li>
+</ul>
+<h5 id="深度（场景捕捉组件-2D）"><a href="#深度（场景捕捉组件-2D）" class="headerlink" title="深度（场景捕捉组件 2D）"></a>深度（场景捕捉组件 2D）</h5><ul>
+<li>投影类型：正交投影</li>
+<li>纹理目标：<code>RT_Depth</code></li>
+<li>捕获源：R 中的场景深度</li>
+<li>捕获每一帧：假</li>
+<li>移动时捕获：假</li>
+</ul>
+<h4 id="粒子系统"><a href="#粒子系统" class="headerlink" title="粒子系统"></a>粒子系统</h4><ul>
+<li>粒子系统资产： <code>NS_FoliageAnalysis</code></li>
+</ul>
+<p>确保组件具有父级，如下图所示。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216162218725.png" srcset="/img/loading.gif" lazyload alt="image-20230216162218725"></p>
+<p>将三个场景捕获组件 2D 添加到场景组件后，将场景组件的旋转设置为：</p>
+<p><strong>X&#x3D;540.0</strong></p>
+<p><strong>Y&#x3D;-90.0</strong></p>
+<p><strong>Z&#x3D;180.0</strong></p>
+<p>创建一个名为 <strong>Wait5Frame</strong> 的<strong>宏</strong>（因为渲染目标并不总是在捕获后立即更新，而是在几帧后更新）。</p>
+<p>在 <strong>Wait5Frames</strong> 宏中，添加五个延迟节点，每个<strong>节点</strong>的<strong>持续时间</strong>设置为 0.0。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216162455135.png" srcset="/img/loading.gif" lazyload alt="image-20230216162455135"></p>
+<p>在“事件图表”中，添加<strong>更新时事件</strong>节点，并确保还添加对父函数的调用。然后，将“捕获场景”节点连接到每个<strong>场景捕获</strong>组件。</p>
+<p>添加对<strong>Build Foliage Transforms</strong>函数的调用。将 <strong>Foliage Distribution Map</strong>输入设置为 <code>RT_Classifications</code>，将<strong>法线和深度贴图</strong>设置为<code>RT_Normals</code> 。</p>
+<p><strong>RTWorldBounds</strong> 是一个包含捕获区域的框。局部最小值为<strong>CaptureWidth</strong> * -0.5，局部最大值为 <strong>CaptureWidth</strong> * 0.5 。然后，这些偏移将转换为世界空间（以便稍后添加地理参考-georeferenced）。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216162846126.png" srcset="/img/loading.gif" lazyload alt="image-20230216162846126"></p>
+<p>在<strong>Event BeginPlay</strong> 节点中，我们还希望植被在 2 秒后初始更新并让世界场景中布满植被。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216162935701.png" srcset="/img/loading.gif" lazyload alt="image-20230216162935701"></p>
+<p>在<strong>构造脚本</strong>中，确保将捕获组件的<strong>正交</strong>宽度设置为捕获<strong>宽度</strong>。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163128107.png" srcset="/img/loading.gif" lazyload alt="image-20230216163128107"></p>
+<h2 id="Step-7-在场景中放置Actor"><a href="#Step-7-在场景中放置Actor" class="headerlink" title="Step 7: 在场景中放置Actor"></a>Step 7: 在场景中放置Actor</h2><p><strong>现在可以将BP_FoliageCaptureActor</strong>放置在场景中。下面显示的设置可用于在树中生成。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163226388.png" srcset="/img/loading.gif" lazyload alt="image-20230216163226388"></p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163237974.png" srcset="/img/loading.gif" lazyload alt="image-20230216163237974"></p>
+<p>将cesium世界地形Actor换成<code>BP_ProceduralFoliageEllipsoid</code>（记下您之前的token&#x2F;资产ID，以便它们可以用于新Actor）。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163536666.png" srcset="/img/loading.gif" lazyload alt="image-20230216163536666"></p>
+<p>将<strong>FoliageCaptureActor</strong>变量设置为场景中的相应演员，然后单击<strong>“保存</strong>”。</p>
+<p>上述设置应导致在运行时生成许多多维数据集实例。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163812284.png" srcset="/img/loading.gif" lazyload alt="image-20230216163812284"></p>
+<p>通过从Quixel导入摄影测量资产或从免费的澳大利亚农村环境包中导入树木，可以轻松获得惊人的结果。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163849495.png" srcset="/img/loading.gif" lazyload alt="image-20230216163849495"></p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216163859484.png" srcset="/img/loading.gif" lazyload alt="image-20230216163859484"></p>
+<h2 id="优化和故障排除"><a href="#优化和故障排除" class="headerlink" title="优化和故障排除"></a>优化和故障排除</h2><p>在一个帧中添加多个实例可能会导致故障，启用碰撞和距离字段时影响最大。</p>
+<p>只需禁用网格类型（如草）的距离场和碰撞即可减少影响。另一个改进是将树叶的生成摊销到多个框架上，这可以通过合并<code>FoliageHISM</code>组件来完成。</p>
+<p>此外，生成器还有一些限制：</p>
+<h4 id="场景中存在其他图块集（例如-OSM-建筑物）可能会导致植物放置不当。"><a href="#场景中存在其他图块集（例如-OSM-建筑物）可能会导致植物放置不当。" class="headerlink" title="场景中存在其他图块集（例如 OSM 建筑物）可能会导致植物放置不当。"></a>场景中存在其他图块集（例如 OSM 建筑物）可能会导致植物放置不当。</h4><ul>
+<li>一种可能的解决方法是将<strong>基元渲染模式Primitive Render Mode</strong>设置为<strong>使用仅显示列表Use ShowOnly List</strong>，</li>
+<li>设置为使用仅显示列表，<strong>其中显示仅演员</strong>包含铯地形图块集Actor，其中<strong>仅显示Actor-ShowOnlyActors</strong>包含<code>Cesium Terrain Tileset actor</code>：</li>
+</ul>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216164616074.png" srcset="/img/loading.gif" lazyload alt="image-20230216164616074"></p>
+<ul>
+<li>如果为植物类型启用了 <strong>bAlignToSurfaceWithRaycast</strong>，则 <strong>FoliageCaptureActor</strong> 和地形图瓦片需要使用在项目设置中设置的唯一追踪通道。有关说明，请参阅<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/4.26/en-US/InteractiveExperiences/Physics/Collision/HowTo/AddCustomCollisionType/">虚幻引擎文档</a>。</li>
+</ul>
+<h4 id="本教程中提供的树叶分类系统可能会导致将树叶放置在水体上。"><a href="#本教程中提供的树叶分类系统可能会导致将树叶放置在水体上。" class="headerlink" title="本教程中提供的树叶分类系统可能会导致将树叶放置在水体上。"></a>本教程中提供的树叶分类系统可能会导致将树叶放置在水体上。</h4><ul>
+<li>如果这是项目的问题，请尝试修改在构建植物分类 Niagara模块中创建的暂存器。</li>
+</ul>
+<h4 id="植物系统可能会捕获具有较低缩放级别或细节级别的瓦片，这会导致在某些情况下，随着较高细节图瓦片的流入，这些瓦片会升高到地表面上方。"><a href="#植物系统可能会捕获具有较低缩放级别或细节级别的瓦片，这会导致在某些情况下，随着较高细节图瓦片的流入，这些瓦片会升高到地表面上方。" class="headerlink" title="植物系统可能会捕获具有较低缩放级别或细节级别的瓦片，这会导致在某些情况下，随着较高细节图瓦片的流入，这些瓦片会升高到地表面上方。"></a>植物系统可能会捕获具有较低缩放级别或细节级别的瓦片，这会导致在某些情况下，随着较高细节图瓦片的流入，这些瓦片会升高到地表面上方。</h4><ul>
+<li>减小 <strong>CaptureWidth</strong> 值将限制组件捕获玩家周围的较小区域，该区域包含更高级别的瓦片。</li>
+<li>扩展系统以在玩家在捕获网格的各个部分移动时更频繁地更新。</li>
+</ul>
+<h4 id="在瓦片材质中使用自定义法线贴图会导致实例旋转不正确。"><a href="#在瓦片材质中使用自定义法线贴图会导致实例旋转不正确。" class="headerlink" title="在瓦片材质中使用自定义法线贴图会导致实例旋转不正确。"></a>在瓦片材质中使用自定义法线贴图会导致实例旋转不正确。</h4><ul>
+<li>这可以通过启用 <strong>bAlignToSurfaceWithRaycast</strong> 来解决，对植物构建器的性能有轻微的影响（但是，这取决于您的系统）。</li>
+</ul>
+<p>还值得注意的是，与生成器一起使用的材质需要在材质中启用与<strong>实例化静态网格体一起使用</strong>。</p>
+<p><img src="https://jeremy233.oss-cn-beijing.aliyuncs.com/img1/image-20230216165809939.png" srcset="/img/loading.gif" lazyload alt="image-20230216165809939"></p>
+<h2 id="完整源代码"><a href="#完整源代码" class="headerlink" title="完整源代码"></a>完整源代码</h2><p>该项目的源代码也可<a target="_blank" rel="noopener" href="https://github.com/SquarerFive/cesium-procedural-foliage">在GitHub上找到</a>（针对虚幻引擎4.26.2配置）。</p>
+<p>目前，该项目正在使用在 CesiumForUnrealSamples 中找到的地形图块集的默认令牌。要添加磁贴，您需要连接您的铯离子帐户。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/UE5/">#UE5</a>
+      
+        <a href="/tags/cesium/">#cesium</a>
+      
+        <a href="/tags/Procedurally/">#Procedurally</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/20/%E4%BD%BF%E7%94%A8OCEANOLOGY5%E5%88%B6%E4%BD%9C%E6%B5%B7%E6%B4%8B/" title="通过OCEANOLOGY制作海岸线">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">通过OCEANOLOGY制作海岸线</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/29/Cityengine%E5%88%B0unreal/" title="Cityengine到unreal">
+                        <span class="hidden-mobile">Cityengine到unreal</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nobusuanzifollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
